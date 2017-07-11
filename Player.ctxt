@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=
+comment0.target=void\ act()
+comment0.text=\r\n\ Act\ -\ do\ whatever\ the\ Player\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment1.params=
+comment1.target=void\ arrowKeys()
+comment1.text=\r\n\ arrowKeys\ -\r\n\ \r\n
+comment2.params=
+comment2.target=void\ movement()
+comment2.text=\r\n\ movement\ -\ \r\n
+comment3.params=dirX\ dirY
+comment3.target=boolean\ checkClear(int,\ int)
+comment3.text=\r\n\ checkClear\ -\r\n
+numComments=4

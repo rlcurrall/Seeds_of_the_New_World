@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.params=
+comment0.target=SantaElena()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ SantaElena.\r\n\ \r\n
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\r\n\ Act\:\ Will\ handle\ monitoring\ and\ setting\ the\ players\ gold\ value\ in\ their\ treasury\r\n\ and\ the\ current\ date\ in\ game.\r\n
+comment2.params=
+comment2.target=void\ prepare()
+comment2.text=\r\n\ Prepare\:\ populate\ world\ with\ objects\ defined\ above\r\n
+numComments=3
