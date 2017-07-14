@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.params=job
+comment0.target=Value(java.lang.String)
+comment0.text=
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ Value\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment2.params=
+comment2.target=void\ getLevel()
+comment2.text=\r\n\ getLevel\ -\ get\ the\ level\ of\ the\ worker\ from\ the\ SantaElena\ world\r\n
+comment3.params=
+comment3.target=void\ calcValue()
+comment3.text=\r\n\ calcValue\ -\ calculate\ the\ value\ of\ a\ business\ at\ its\ current\ level\r\n
+comment4.params=
+comment4.target=void\ display()
+comment4.text=\r\n\ display\ -\ update\ the\ image\ of\ the\ object\ to\ show\ the\ value\ of\ the\ business\ in\ the\ case\ the\ user\r\n\ \ \ \ \ \ \ \ \ \ \ sells\ the\ business.\r\n
+numComments=5

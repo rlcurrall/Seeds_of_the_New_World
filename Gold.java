@@ -1,15 +1,15 @@
 import greenfoot.*;
 
 /**
- * Write a description of class UI here.
+ * Write a description of class Gold here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class UI extends Actor
+public class Gold extends Actor
 {
     /**
-     * Act - do whatever the UI wants to do. This method is called whenever
+     * Act - do whatever the Gold wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 

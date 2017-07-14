@@ -1,14 +1,17 @@
 #BlueJ class context
 comment0.params=
 comment0.target=void\ act()
-comment0.text=\n\ Act\ -\ do\ whatever\ the\ Player\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
+comment0.text=\r\n\ Act\ -\ do\ whatever\ the\ Player\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
 comment1.params=
 comment1.target=void\ arrowKeys()
-comment1.text=\n\ arrowKeys\ -\n\ \n
+comment1.text=\r\n\ arrowKeys\ -\ Reads\ input\ from\ user\ to\ determine\ the\ direction\ to\ move\ the\ Player\r\n
 comment2.params=
 comment2.target=void\ movement()
-comment2.text=\n\ movement\ -\ \n
+comment2.text=\r\n\ movement\ -\ \ \ Takes\ value\ set\ by\ the\ arrowKeys\ function,\ calls\ the\ checkClear\ function\ to\ ensure\ that\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ player\ can\ be\ moved\ in\ desired\ direction,\ if\ true\ Player\ is\ moved\ 3\ px\ in\ that\ direction.\r\n
 comment3.params=dirX\ dirY
 comment3.target=boolean\ checkClear(int,\ int)
-comment3.text=\n\ checkClear\ -\n
-numComments=4
+comment3.text=\r\n\ checkClear\ -\ Checks\ 3\ px\ in\ the\ direction\ the\ user\ want\ to\ move\ the\ Player,\ returns\ TRUE\ or\ FALSE\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ if\ Player\ can\ be\ moved\ in\ that\ direction\r\n
+comment4.params=
+comment4.target=void\ dialog()
+comment4.text=\r\n\ dialog\ -\ \ \ \ \ something.\r\n
+numComments=5

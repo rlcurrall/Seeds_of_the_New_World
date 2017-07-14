@@ -16,6 +16,7 @@ public class Player extends Actor
     // Sound for NPC
     GreenfootSound hmm = new GreenfootSound( "hmm.wav" );
     
+    
     // Player Images
     // Up/Down
     GreenfootImage player = new GreenfootImage( "Player.png" );
@@ -51,8 +52,7 @@ public class Player extends Actor
     } // end act method
     
     /**
-     * arrowKeys -
-     * 
+     * arrowKeys - Reads input from user to determine the direction to move the Player
      */
     public void arrowKeys() {
         // reset values
@@ -75,7 +75,8 @@ public class Player extends Actor
     } // end arrowKeys method
     
     /**
-     * movement - 
+     * movement -   Takes value set by the arrowKeys function, calls the checkClear function to ensure that
+     *              player can be moved in desired direction, if true Player is moved 3 px in that direction.
      */
     public void movement() {
         if (dirX == 1 && checkClear(dirX, dirY)) {
@@ -102,7 +103,8 @@ public class Player extends Actor
     }// end movement method
     
     /**
-     * checkClear -
+     * checkClear - Checks 3 px in the direction the user want to move the Player, returns TRUE or FALSE
+     *              if Player can be moved in that direction
      */
     public boolean checkClear(int dirX, int dirY) {
         /* VARIABLES */
@@ -138,4 +140,22 @@ public class Player extends Actor
             return true;
         } // end else-if block
     } // end checkClear method
-}
+    
+    /**
+     * dialog -     something.
+     */
+    public void dialog() {
+        // get color at Player's current location
+        Color currentColor = border.getColorAt( getX(), getY() );
+        
+        if ( currentColor.equals( Color.blue ) ) {
+            
+        } else if ( currentColor.equals( Color.red ) ) {
+            
+        } else if ( currentColor.equals( Color.green) ) {
+            
+        } else {
+            
+        }
+    } // end dialog method
+} // end Player class

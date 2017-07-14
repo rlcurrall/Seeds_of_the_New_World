@@ -3,22 +3,25 @@ import greenfoot.*;
 /**
  * Write a description of class Treasury here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Robert Currall
+ * @version 17.7.14
  */
 public class Treasury extends Actor
 {
+    /*******************************************************************************************************/
     /* FIELDS */
+    /*******************************************************************************************************/
     //* Public variables *//
-    public int gold;
     public int taxPeriod;
+    public int month;
     // Booleans to determine if worker is employed
     public boolean farmerHired;
     public boolean blacksmithHired;
     public boolean merchantHired;
     // variables for tax collection
-    public int collections;
-    public int salaries;
+    public int gold;
+    private int collections;
+    private int salaries;
     
     // Sounds for when collecting taxes
     GreenfootSound ping = new GreenfootSound( "ping.wav" );
@@ -33,12 +36,14 @@ public class Treasury extends Actor
     private int blacksmithLevel;
     private int merchantLevel;
     
-    
+    /*******************************************************************************************************/
     /* CONSTRUCTOR */
+    /*******************************************************************************************************/
     public Treasury() {
         // set default values
         gold = 300;
         taxPeriod = 0;
+        month = 0;
         farmerLevel = 0;
         blacksmithLevel = 0;
         merchantLevel = 0;
@@ -47,12 +52,14 @@ public class Treasury extends Actor
         merchantHired = false;
     } // end Treasury constructor
     
+    /*******************************************************************************************************/
     /* METHODS */
+    /*******************************************************************************************************/
     /**
      * collectTaxes -
      */
     public void collectTaxes() {
-        if( taxPeriod == 700 ) {
+        if( taxPeriod == 600 ) {
             // sum taxes recieved this month
             collections = 0;
             if ( farmerHired ) {
@@ -72,6 +79,7 @@ public class Treasury extends Actor
             ping.setVolume(50);
             ping.play();
             taxPeriod = 0;
+            month++;
         } else {
             taxPeriod++;
         }
@@ -80,39 +88,63 @@ public class Treasury extends Actor
     /**
      * hire -
      */  
-    public void hire( String job ) {
-        if ( job == "Farmer" && !farmerHired ) {
+    public boolean hire( String job ) {
+        if ( job == "Farmer" && !farmerHired  && gold >= 200 ) {
             farmerHired = true;
             farmerLevel = 1;
             gold = gold - 200;
-        } else if ( job == "Blacksmith" && !blacksmithHired ) {
+            return true;
+        } else if ( job == "Farmer" && gold < 200 ) {
+            return false;
+        } else if ( job == "Blacksmith" && !blacksmithHired && gold >= 400 ) {
             blacksmithHired = true;
             blacksmithLevel = 1;
             gold = gold - 400;
-        } else if ( job == "Merchant" && !merchantHired ) {
+            return true;
+        } else if ( job == "Blacksmith" && gold < 400 ) {
+            return false;
+        }else if ( job == "Merchant" && !merchantHired && gold >= 800 ) {
             merchantHired = true;
             merchantLevel = 1;
             gold = gold - 800;
+            return true;
+        } else if ( job == "Merchant" && gold < 800 ) {
+            return false;
         } // end else-if block
+        
+        // return to supress error on compile
+        return false;
     } // end hire method
     
     /**
      * giveRaise -
      */
-    public void giveRaise( String job ) {
-        if ( job == "Farmer" && farmerHired ) {
+    public boolean giveRaise( String job ) {
+        if ( job == "Farmer" && farmerHired && gold >= 200 * farmerLevel ) {
             gold  = gold - ( 200 * farmerLevel );
             farmerTaxes = (50 * farmerLevel);
             farmerLevel++;
-        } else if ( job == "Blacksmith" && blacksmithHired ) {
+            return true;
+        } else if ( job == "Farmer" && gold < 200 * farmerLevel ) {
+            return false;
+        } else if ( job == "Blacksmith" && blacksmithHired  && gold >= 400 * blacksmithLevel ) {
             gold = gold - ( 400 * blacksmithLevel );
             blacksmithTaxes = ( 100 * blacksmithLevel );
             blacksmithLevel++;
-        } else if ( job == "Merchant" && merchantHired ) {
+            return true;
+        } else if ( job == "Blacksmith" && gold < 400 * blacksmithLevel ) {
+            return false;
+        } else if ( job == "Merchant" && merchantHired && gold >= 800 * merchantLevel ) {
             gold = gold - ( 800 * merchantLevel );
             merchantTaxes = ( 200 * merchantLevel );
             merchantLevel++;
+            return true;
+        } else if ( job == "Merchant" && gold < 800 * merchantLevel ) {
+            return false;
         } // end else-if block
+        
+        // return to supress error on compile
+        return false;
     } // end giveRaise method
     
     /**
