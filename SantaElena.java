@@ -1,3 +1,4 @@
+/* IMPORTS */
 import java.util.*;
 import greenfoot.*;
 
@@ -23,12 +24,21 @@ public class SantaElena extends World
     // Create Treasury to manage user's gold
     Treasury treasury = new Treasury();
     
+    // Create NPC signs
+    Sign farmerSign = new Sign();
+    Sign blacksmithSign = new Sign();
+    Sign merchantSign = new Sign();
+    
+    // Create NPCs
+    Farmer farmer = new Farmer();
+    Blacksmith blacksmith = new Blacksmith();
+    Merchant merchant = new Merchant();
+    
     /*******************************************************************************************************/
     /* CONSTRUCTORS */
     /*******************************************************************************************************/
     /**
      * Constructor for objects of class SantaElena.
-     * 
      */
     public SantaElena()
     {    
@@ -42,8 +52,8 @@ public class SantaElena extends World
     /* METHODS */
     /*******************************************************************************************************/
     /**
-     * Act: Will handle monitoring and setting the players gold value in their treasury
-     * and the current date in game.
+     * Act -    Will handle monitoring and setting the players gold value in their treasury
+     *          and the current date in game.
      */
     public void act() {
          // play background music when game begins
@@ -51,6 +61,7 @@ public class SantaElena extends World
          background.playLoop();
          
          // check if game over
+         checkGameOver();
          
          // collect taxes
          treasury.collectTaxes();
@@ -61,12 +72,19 @@ public class SantaElena extends World
     } // end act method
     
     /**
-     * Prepare: populate world with objects defined above
+     * Prepare -    populate world with objects defined above
      */
     public void prepare() {
         gold = 0;
         month = 0;
+        
+        // Add Player object
         addObject( player, 575, 240 );
+        
+        // Add Sign objects
+        // addObject( farmerSign, x, x);
+        // addObject( blacksmithSign, x, x);
+        // addObject( merchantSign, x, x);
     } // end prepare method
     
     /*******************************************************************************************************/
@@ -75,27 +93,36 @@ public class SantaElena extends World
     
     // DISPLAY WORKER DIALOG
     /**
-     * 
+     * displayDialog -  Adds a Cost/Tax/Value object into the world if they do not already exist
      */
     public void displayDialog(String job) {
-        // check if objects exist in world
-        List cost = this.getObjects(Cost.class);
-        List tax = this.getObjects(Tax.class);
-        List value = this.getObjects(Value.class);
-        
-        // create and add objects to the world
-        if ( cost.isEmpty() ) {
-            Cost workerCost = new Cost(job);
-            // addObject( workerCost , x, x );
-        } // end if
-        if ( tax.isEmpty() ) {
-            Tax workerTax = new Tax(job);
-            // addObject( workerTax, x, x);
-        } // end if
-        if ( value.isEmpty() ) {
-            Value workerValue = new Value(job);
-            // addObject( workerValue, x, x);
-        } // end if
+        if ( treasury.checkHired(job) ) {
+            // check if objects exist in world
+            List name = this.getObjects(Name.class);
+            List cost = this.getObjects(Cost.class);
+            List tax = this.getObjects(Tax.class);
+            List value = this.getObjects(Value.class);
+            
+            // create and add objects to the world
+            if ( name.isEmpty() ) {
+                Name workerName = new Name(job);
+                // addObject( workerName, x, x );
+            } // end if
+            if ( cost.isEmpty() ) {
+                Cost workerCost = new Cost(job);
+                // addObject( workerCost , x, x );
+            } // end if
+            if ( tax.isEmpty() ) {
+                Tax workerTax = new Tax(job);
+                // addObject( workerTax, x, x);
+            } // end if
+            if ( value.isEmpty() ) {
+                Value workerValue = new Value(job);
+                // addObject( workerValue, x, x);
+            } // end if
+        } else {
+            // display hire dialog
+        }
     } // end displayFarmerDialog method
     
     // REMOVE WORKER DIALOG
@@ -104,11 +131,15 @@ public class SantaElena extends World
      */
     public void removeWorkerDialog() {
         // check if objects exist in world
+        List name = this.getObjects(Name.class);
         List cost = this.getObjects(Cost.class);
         List tax = this.getObjects(Tax.class);
         List value = this.getObjects(Value.class);
         
         // if objects exist remove them
+        if (!name.isEmpty()) {
+            this.removeObjects(name);
+        } // end if
         if (!cost.isEmpty()) {
             this.removeObjects(cost);
         } // end if
@@ -125,61 +156,70 @@ public class SantaElena extends World
     /*******************************************************************************************************/
     // HIRE WORKER
     /**
-     * 
+     * hireFarmer -     Will hire the Farmer in the Treasury object, calls the hire() method from the 
+     *                  Treasury object which returns a boolean of success or failure, handles any exceptions
      */
     public void hireFarmer() {
         boolean res = treasury.hire("Farmer");
         
-        if ( !res ) {
-            
+        if ( res ) {
+            // removeObject( farmerSign, x, x);
+            // addObject( farmer, x, x);
         } else {
-            
+            // handle error
         }
     } // end hireFarmer method
     
     /**
-     * 
+     * hireBlacksmith - Will hire the Blacksmith in the Treasury object, calls the hire() method from the 
+     *                  Treasury object which returns a boolean of success or failure, handles any exceptions
      */
     public void hireBlacksmith() {
         boolean res = treasury.hire("Blacksmith");
         
-        if ( !res ) {
-            
+        if ( res ) {
+            // removeObject( blacksmithSign, x, x);
+            // addObject( blacksmith, x, x);
         } else {
-            
+            // handle error
         }
     } // end hireBlacksmith method
     
     /**
-     * 
+     * hireMerchant -   Will hire the Merchant in the Treasury object, calls the hire() method from the 
+     *                  Treasury object which returns a boolean of success or failure, handles any exceptions
      */
     public void hireMerchant() {
         boolean res = treasury.hire("Merchant");
         
-        if ( !res ) {
-            
+        if ( res ) {
+            // removeObject( merchantSign, x, x);
+            // addObject( merchant, x, x);
         } else {
-            
+            // handle error
         }
     } // end hireMerchant method
     
     // GIVE WORKER A RAISE
     /**
-     * 
+     * giveRaiseFarmer -    Will give a raise to the Farmer in the Treasury object. Will be used by the 
+     *                      Player object.
      */
     public void giveRaiseFarmer() {
         boolean res = treasury.giveRaise("Farmer");
     } // end giveRaiseFarmer method
     
     /**
-     * 
+     * giveRaiseBlacksmith - Will give a raise to the Blacksmith in the Treasury object. Will be used by the 
+     *                       Player object.
      */
     public void giveRaiseBlacksmith() {
         boolean res = treasury.giveRaise("Blacksmith");
     } // end giveRaiseBlacksmith method
     
     /**
-     * 
+     * giveRaiseMerchant -  Will give a raise to the Merchant in the Treasury object. Will be used by the 
+     *                      Player object.
      */
     public void giveRaiseMerchant() {
         boolean res = treasury.giveRaise("Merchant");
@@ -187,25 +227,45 @@ public class SantaElena extends World
     
     // GET WORKER LEVEL
     /**
-     * 
+     * getLevelFarmer -     Gets the Farmer level from the treasury object, will be used by objects
+     *                      that exist in the world such as the Cost/Tax/Value objects
      */
     public int getLevelFarmer() {
         return treasury.getLevel("Farmer");
     } // end getLevelFarmer method
     
     /**
-     * 
+     * getLevelBlacksmtih - Gets the Blacksmith level from the treasury object, will be used by objects
+     *                      that exist in the world such as the Cost/Tax/Value objects
      */
     public int getLevelBlacksmith() {
         return treasury.getLevel("Blacksmith");
     } // end getLevelBlacksmith method
     
     /**
-     * 
+     * getLevelMerchant -   Gets the Merchants level from the treasury object, will be used by objects
+     *                      that exist in the world such as the Cost/Tax/Value objects
      */
     public int getLevelMerchant() {
         return treasury.getLevel("Merchant");
     } // end getLevelMerchant
     
-    
+    /*******************************************************************************************************/
+    /* CHECK GAMEOVER */
+    /*******************************************************************************************************/
+    /**
+     * checkGameOver -  Checks if the time has run out or the player reached the desired gold value
+     */
+    public void checkGameOver() {
+        // if player runs out of time
+        if ( month == 131 ) {
+            GameOver lose = new GameOver();
+            background.stop();
+            Greenfoot.setWorld(lose);
+        } else if ( gold == 200000 ) {
+            WinScreen win = new WinScreen();
+            background.stop();
+            Greenfoot.setWorld(win);
+        } // end else-if block
+    } // end checkGameOver method
 } // end SantaElena class

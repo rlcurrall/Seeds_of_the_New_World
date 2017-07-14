@@ -76,7 +76,7 @@ public class Treasury extends Actor
             gold = gold + collections;
             
             // play sound and reset sound period
-            ping.setVolume(50);
+            ping.setVolume(20);
             ping.play();
             taxPeriod = 0;
             month++;
@@ -86,7 +86,7 @@ public class Treasury extends Actor
     }
     
     /**
-     * hire -
+     * hire -   If Worker not already hired, hire the worker, and subtract cost from gold
      */  
     public boolean hire( String job ) {
         if ( job == "Farmer" && !farmerHired  && gold >= 200 ) {
@@ -117,7 +117,8 @@ public class Treasury extends Actor
     } // end hire method
     
     /**
-     * giveRaise -
+     * giveRaise -  Removes cost from gold, changes value of Taxes for that worker, and increments level,
+     *              returns a boolean on if raise was successful or not
      */
     public boolean giveRaise( String job ) {
         if ( job == "Farmer" && farmerHired && gold >= 200 * farmerLevel ) {
@@ -148,27 +149,30 @@ public class Treasury extends Actor
     } // end giveRaise method
     
     /**
-     * fire -
+     * fire - ...
      */
     public void fire( String job ) {
         if ( job == "Farmer" && farmerHired ) {
             farmerHired = false;
+            farmerTaxes = 50;
         } else if ( job == "Blacksmith" && blacksmithHired ) {
             blacksmithHired = false;
+            blacksmithTaxes = 100;
         } else if ( job == "Merchant" && merchantHired ) {
             merchantHired = false;
+            merchantTaxes = 200;
         } // end else-if block
     } // end fire method
     
     /**
-     * getTreasury -
+     * getTreasury - Returns the value of gold stored in the Treasury
      */
     public int getTreasury() {
         return gold;
     } // end getTreasury method
     
     /**
-     * getLevel -
+     * getLevel - Returns the level of a given worker
      */
     public int getLevel( String job ) {
         if ( job == "Farmer" ) {
@@ -182,4 +186,19 @@ public class Treasury extends Actor
         // To address error preventing compile
         return 0;
     } // end getLevel method
+    
+    /**
+     * checkHired - Checks if a worker has been hired, used by displayDialog method in SantaElena
+     */
+    public boolean checkHired( String job ) {
+        if ( job == "Farmer" ) {
+            return farmerHired;
+        } else if ( job == "Blacksmith" ) {
+            return blacksmithHired;
+        } else if ( job == "Merchant" ) {
+            return merchantHired;
+        } // end else-if block
+        
+        return false;
+    } // end checkHired method
 } // end Treasury class

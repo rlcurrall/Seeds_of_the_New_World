@@ -15,7 +15,7 @@ public class Player extends Actor
     
     // Sound for NPC
     GreenfootSound hmm = new GreenfootSound( "hmm.wav" );
-    
+    private boolean hmmPlayed = false;
     
     // Player Images
     // Up/Down
@@ -33,6 +33,9 @@ public class Player extends Actor
     // Direction variables
     int dirX;
     int dirY;
+    
+    // Variables for Dialog boxes
+    private boolean dialogRemoved = false;
     
     
     /* METHODS */
@@ -149,13 +152,83 @@ public class Player extends Actor
         Color currentColor = border.getColorAt( getX(), getY() );
         
         if ( currentColor.equals( Color.blue ) ) {
+            // Farmer
+            dialogRemoved = false;
+            boolean isHired = ((SantaElena) getWorld()).treasury.checkHired("Farmer");
+            ((SantaElena) getWorld()).displayDialog("Farmer");
             
+            // play sound once
+            if ( !hmmPlayed ) {
+                hmm.setVolume(20);
+                hmm.play();
+                hmmPlayed = true;
+            } // end if
+            
+            if ( isHired ) {
+                if( "r".equals(Greenfoot.getKey()) || "R".equals(Greenfoot.getKey()) ) {
+                    ((SantaElena) getWorld()).giveRaiseFarmer();
+                } else if ( "c".equals(Greenfoot.getKey()) || "C".equals(Greenfoot.getKey()) ) {
+                    //((SantaElena) getWorld()).closeFarmer();
+                } // end else-if block
+            } else {
+                if( "h".equals(Greenfoot.getKey()) || "H".equals(Greenfoot.getKey()) ) {
+                    ((SantaElena) getWorld()).hireFarmer();
+                } // end if
+            } // end if
         } else if ( currentColor.equals( Color.red ) ) {
+            // Blacksmith
+            dialogRemoved = false;
+            boolean isHired = ((SantaElena) getWorld()).treasury.checkHired("Blacksmith");
+            ((SantaElena) getWorld()).displayDialog("Blacksmith");
             
+            // play sound once
+            if ( !hmmPlayed ) {
+                hmm.setVolume(20);
+                hmm.play();
+                hmmPlayed = true;
+            } // end if
+            
+            if ( isHired ) {
+                if( "r".equals(Greenfoot.getKey()) || "R".equals(Greenfoot.getKey()) ) {
+                    ((SantaElena) getWorld()).giveRaiseBlacksmith();
+                } else if ( "c".equals(Greenfoot.getKey()) || "C".equals(Greenfoot.getKey()) ) {
+                    //((SantaElena) getWorld()).closeBlacksmith();
+                } // end else-if block
+            } else {
+                if( "h".equals(Greenfoot.getKey()) || "H".equals(Greenfoot.getKey()) ) {
+                    ((SantaElena) getWorld()).hireBlacksmith();
+                } // end if
+            } // end if
         } else if ( currentColor.equals( Color.green) ) {
+            // Merchant
+            dialogRemoved = false;
+            boolean isHired = ((SantaElena) getWorld()).treasury.checkHired("Merchant");
+            ((SantaElena) getWorld()).displayDialog("Merchant");
             
+            // play sound once
+            if ( !hmmPlayed ) {
+                hmm.setVolume(20);
+                hmm.play();
+                hmmPlayed = true;
+            } // end if
+            
+            if ( isHired ) {
+                if( "r".equals(Greenfoot.getKey()) || "R".equals(Greenfoot.getKey()) ) {
+                    ((SantaElena) getWorld()).giveRaiseMerchant();
+                } else if ( "c".equals(Greenfoot.getKey()) || "C".equals(Greenfoot.getKey()) ) {
+                    //((SantaElena) getWorld()).closeMerchant();
+                } // end else-if block
+            } else {
+                if( "h".equals(Greenfoot.getKey()) || "H".equals(Greenfoot.getKey()) ) {
+                    ((SantaElena) getWorld()).hireMerchant();
+                } // end if
+            } // end if
         } else {
-            
+            if (!dialogRemoved){
+                ((SantaElena) getWorld()).removeWorkerDialog();
+                dialogRemoved = true;
+            } // end if
+            hmmPlayed = false;
         }
     } // end dialog method
 } // end Player class

@@ -15,6 +15,7 @@ public class Cost extends Actor
     String job;
     int level;
     int cost;
+    Color background = new Color(0xffcc66);
     
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
@@ -33,14 +34,13 @@ public class Cost extends Actor
     public void act() 
     {
         getLevel();
-        calcCost();
-        display();
     }
     
     /**
      * getLevel - get the level of the worker from the SantaElena world
      */
     private void getLevel() {
+        int oldLevel = level;
         if (job == "Farmer") {
             level = ((SantaElena) getWorld()).getLevelFarmer();
         } else if (job == "Blacksmith") {
@@ -48,6 +48,12 @@ public class Cost extends Actor
         } else if (job == "Merchant") {
             level = ((SantaElena) getWorld()).getLevelMerchant();
         } // end else-if block
+        
+        // update background if level has changed
+        if ( level != oldLevel ) {
+            calcCost();
+            display();
+        } // end if
     } // end getLevel method
     
     /**
@@ -67,7 +73,6 @@ public class Cost extends Actor
      * display - update the image of the object to show the cost to give the worker a raise
      */
     private void display() {
-        Color background = new Color(0xffcc66);
-        setImage( new GreenfootImage("" + cost, 12, Color.black, background));
+        setImage( new GreenfootImage("Next Level: \t" + cost + " Reals", 12, Color.black, background));
     } // end display method
 } // end Cost class

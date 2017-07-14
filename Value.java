@@ -16,6 +16,7 @@ public class Value extends Actor
     String job;
     int level;
     int value;
+    Color background = new Color(0xffcc66);
     
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
@@ -56,11 +57,11 @@ public class Value extends Actor
      */
     private void calcValue() {
         if (job == "Farmer") {
-            value = 200 * level;
+            value = 100 + 10 * level;
         } else if (job == "Blacksmith") {
-            value = 400 * level;
+            value = 200 + 20 * level;
         } else if (job == "Merchant") {
-            value = 800 * level;
+            value = 400 + 40 * level;
         } // end else-if block
     } // end calcValue method
     
@@ -69,7 +70,6 @@ public class Value extends Actor
      *           sells the business.
      */
     private void display() {
-        Color background = new Color(0xffcc66);
-        setImage( new GreenfootImage("" + value, 12, Color.black, background));
+        setImage( new GreenfootImage("Business Value: " + value + " Reals", 12, Color.black, background));
     } // end display method    
 } // end Value class

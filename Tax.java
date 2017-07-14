@@ -15,6 +15,7 @@ public class Tax extends Actor
     String job;
     int level;
     int tax;
+    Color background = new Color(0xffcc66);
     
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
@@ -33,14 +34,13 @@ public class Tax extends Actor
     public void act() 
     {
         getLevel();
-        calcTax();
-        display();
     }
     
     /**
      * getLevel - get the level of the worker from the SantaElena world
      */
     private void getLevel() {
+        int oldLevel = level;
         if (job == "Farmer") {
             level = ((SantaElena) getWorld()).getLevelFarmer();
         } else if (job == "Blacksmith") {
@@ -48,6 +48,12 @@ public class Tax extends Actor
         } else if (job == "Merchant") {
             level = ((SantaElena) getWorld()).getLevelMerchant();
         } // end else-if block
+        
+        // update background if the level has changed
+        if (level != oldLevel) {
+            calcTax();
+            display();
+        } // end if
     } // end getLevel method
     
     /**
@@ -67,7 +73,6 @@ public class Tax extends Actor
      * display - update the image of the object to show the tax collected each month
      */
     private void display() {
-        Color background = new Color(0xffcc66);
-        setImage( new GreenfootImage("" + tax, 12, Color.black, background));
+        setImage( new GreenfootImage("Montly Taxes:\t" + tax + " Reals", 12, Color.black, background));
     } // end display method
 } // end Tax class
