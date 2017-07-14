@@ -12,6 +12,12 @@ public class SantaElena extends World
     // Background music
     GreenfootSound background = new GreenfootSound( "pamfluite_loop.mp3" );
     
+    // Create Player for user to control
+    Player player = new Player();
+    
+    // Create Treasury to manage user's gold
+    Treasury treasury = new Treasury();
+    
     /* CONSTRUCTORS */
     /**
      * Constructor for objects of class SantaElena.
@@ -23,6 +29,7 @@ public class SantaElena extends World
         super(725, 680, 1); 
         // Run prepare to populate the world with the different objects
         prepare();
+        //addObject( player, 575, 240 );
     } // end SantaElena constructor
     
     /* METHODS */
@@ -44,6 +51,7 @@ public class SantaElena extends World
      * Prepare: populate world with objects defined above
      */
     public void prepare() {
+        addObject( player, 575, 240 );
         
     }
 }
