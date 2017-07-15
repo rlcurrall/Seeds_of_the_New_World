@@ -106,22 +106,34 @@ public class SantaElena extends World
             // create and add objects to the world
             if ( name.isEmpty() ) {
                 Name workerName = new Name(job);
-                // addObject( workerName, x, x );
+                addObject( workerName, 100, 80 );
             } // end if
             if ( cost.isEmpty() ) {
                 Cost workerCost = new Cost(job);
-                // addObject( workerCost , x, x );
+                addObject( workerCost , 100, 120 );
             } // end if
             if ( tax.isEmpty() ) {
                 Tax workerTax = new Tax(job);
-                // addObject( workerTax, x, x);
+                addObject( workerTax, 100, 140);
             } // end if
             if ( value.isEmpty() ) {
                 Value workerValue = new Value(job);
-                // addObject( workerValue, x, x);
+                addObject( workerValue, 100, 160);
             } // end if
         } else {
-            // display hire dialog
+            // check if objects exist in world
+            List name = this.getObjects(Name.class);
+            List cost = this.getObjects(Cost.class);
+            
+            // create and add objects to the world
+            if ( name.isEmpty() ) {
+                Name workerName = new Name(job);
+                addObject( workerName, 100, 100);
+            } // end if
+            if ( cost.isEmpty() ) {
+                Cost workerCost = new Cost(job);
+                addObject( workerCost, 100, 110);
+            } // end if
         }
     } // end displayFarmerDialog method
     
@@ -165,9 +177,14 @@ public class SantaElena extends World
         if ( res ) {
             // removeObject( farmerSign, x, x);
             // addObject( farmer, x, x);
+            List<Cost> cost = this.getObjects(Cost.class);
+            if (cost.size() > 0) {
+                Cost worker = cost.get(0);
+                worker.setLevel( treasury.getLevel("Farmer") );
+            } // end if
         } else {
             // handle error
-        }
+        } // end else-if block
     } // end hireFarmer method
     
     /**
@@ -180,9 +197,14 @@ public class SantaElena extends World
         if ( res ) {
             // removeObject( blacksmithSign, x, x);
             // addObject( blacksmith, x, x);
+            List<Cost> cost = this.getObjects(Cost.class);
+            if (cost.size() > 0) {
+                Cost worker = cost.get(0);
+                worker.setLevel( treasury.getLevel("Blacksmith") );
+            } // end if
         } else {
             // handle error
-        }
+        } // end else-if block
     } // end hireBlacksmith method
     
     /**
@@ -195,9 +217,14 @@ public class SantaElena extends World
         if ( res ) {
             // removeObject( merchantSign, x, x);
             // addObject( merchant, x, x);
+            List<Cost> cost = this.getObjects(Cost.class);
+            if (cost.size() > 0) {
+                Cost worker = cost.get(0);
+                worker.setLevel( treasury.getLevel("Merchant") );
+            } // end if
         } else {
             // handle error
-        }
+        } // end else-if block
     } // end hireMerchant method
     
     // GIVE WORKER A RAISE
@@ -226,12 +253,17 @@ public class SantaElena extends World
     } // end giveRaiseMerchant method
     
     // GET WORKER LEVEL
+    // ERROR IN RETRIEVING THE LEVEL
+	
+	// May no longer be necessary...
+	
     /**
      * getLevelFarmer -     Gets the Farmer level from the treasury object, will be used by objects
      *                      that exist in the world such as the Cost/Tax/Value objects
      */
     public int getLevelFarmer() {
-        return treasury.getLevel("Farmer");
+        int level = treasury.getLevel("Farmer");
+        return level;
     } // end getLevelFarmer method
     
     /**
@@ -239,7 +271,8 @@ public class SantaElena extends World
      *                      that exist in the world such as the Cost/Tax/Value objects
      */
     public int getLevelBlacksmith() {
-        return treasury.getLevel("Blacksmith");
+        //int level = treasury.getLevel("Blacksmith");
+        return 1;
     } // end getLevelBlacksmith method
     
     /**
@@ -247,7 +280,8 @@ public class SantaElena extends World
      *                      that exist in the world such as the Cost/Tax/Value objects
      */
     public int getLevelMerchant() {
-        return treasury.getLevel("Merchant");
+        int level = treasury.getLevel("Merchant");
+        return level;
     } // end getLevelMerchant
     
     /*******************************************************************************************************/

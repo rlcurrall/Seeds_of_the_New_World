@@ -14,7 +14,7 @@ public class Value extends Actor
     /* FIELDS */
     /*******************************************************************************************************/
     String job;
-    int level;
+    int level = 1;
     int value;
     Color background = new Color(0xffcc66);
     
@@ -23,35 +23,14 @@ public class Value extends Actor
     /*******************************************************************************************************/
     public Value(String job) {
         this.job = job;
+        calcValue();
+        display();
     } // end Value constructor
     
     /*******************************************************************************************************/
     /* METHODS */
     /*******************************************************************************************************/
-    /**
-     * Act - do whatever the Value wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
-    {
-        getLevel();
-        calcValue();
-        display();
-    }
-    
-    /**
-     * getLevel - get the level of the worker from the SantaElena world
-     */
-    private void getLevel() {
-        if (job == "Farmer") {
-            level = ((SantaElena) getWorld()).getLevelFarmer();
-        } else if (job == "Blacksmith") {
-            level = ((SantaElena) getWorld()).getLevelBlacksmith();
-        } else if (job == "Merchant") {
-            level = ((SantaElena) getWorld()).getLevelMerchant();
-        } // end else-if block
-    } // end getLevel method
-    
+        
     /**
      * calcValue - calculate the value of a business at its current level
      */
@@ -72,4 +51,13 @@ public class Value extends Actor
     private void display() {
         setImage( new GreenfootImage("Business Value: " + value + " Reals", 12, Color.black, background));
     } // end display method    
+    
+    /**
+     * setLevel -   public function that allows user to set the level, and updates the values.
+     */
+    public void setLevel(int newLevel) {
+        level = newLevel;
+        calcValue();
+        display();
+    } // end setLevel method
 } // end Value class

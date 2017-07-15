@@ -13,59 +13,32 @@ public class Cost extends Actor
     /* FIELDS */
     /*******************************************************************************************************/
     String job;
-    int level;
+    int level = 0;
     int cost;
-    Color background = new Color(0xffcc66);
     
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
     /*******************************************************************************************************/
     public Cost(String job) {
         this.job = job;
+        calcCost();
+        display();
     } // end Cost constructor
     
     /*******************************************************************************************************/
     /* METHODS */
     /*******************************************************************************************************/
-    /**
-     * Act - do whatever the Cost wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
-    {
-        getLevel();
-    }
-    
-    /**
-     * getLevel - get the level of the worker from the SantaElena world
-     */
-    private void getLevel() {
-        int oldLevel = level;
-        if (job == "Farmer") {
-            level = ((SantaElena) getWorld()).getLevelFarmer();
-        } else if (job == "Blacksmith") {
-            level = ((SantaElena) getWorld()).getLevelBlacksmith();
-        } else if (job == "Merchant") {
-            level = ((SantaElena) getWorld()).getLevelMerchant();
-        } // end else-if block
         
-        // update background if level has changed
-        if ( level != oldLevel ) {
-            calcCost();
-            display();
-        } // end if
-    } // end getLevel method
-    
     /**
      * calcCost - calculate the cost of giving the worker a raise
      */
     private void calcCost() {
         if (job == "Farmer") {
-            cost = 200 * level;
+            cost = 200 * (level + 1);
         } else if (job == "Blacksmith") {
-            cost = 400 * level;
+            cost = 400 * (level + 1);
         } else if (job == "Merchant") {
-            cost = 800 * level;
+            cost = 800 * (level + 1);
         } // end else-if block
     } // end calcCost method
     
@@ -73,6 +46,16 @@ public class Cost extends Actor
      * display - update the image of the object to show the cost to give the worker a raise
      */
     private void display() {
-        setImage( new GreenfootImage("Next Level: \t" + cost + " Reals", 12, Color.black, background));
+        Color background = new Color(0xffcc66);
+        setImage( new GreenfootImage("Cost: " + cost + " Reals" , 12, Color.black, background));
     } // end display method
+    
+    /**
+     * setLevel -   public function that allows user to set the level, and updates the values.
+     */
+    public void setLevel(int newLevel) {
+        level = newLevel;
+        calcCost();
+        display();
+    } // end setLevel method
 } // end Cost class

@@ -51,6 +51,7 @@ public class Player extends Actor
         movement();
         // the color of the pixel below the character and display the appropriate dialog box
         //dialogCheck();
+        dialog();
         
     } // end act method
     
@@ -173,6 +174,8 @@ public class Player extends Actor
             } else {
                 if( "h".equals(Greenfoot.getKey()) || "H".equals(Greenfoot.getKey()) ) {
                     ((SantaElena) getWorld()).hireFarmer();
+                    ((SantaElena) getWorld()).removeWorkerDialog();
+                    ((SantaElena) getWorld()).displayDialog("Farmer");
                 } // end if
             } // end if
         } else if ( currentColor.equals( Color.red ) ) {
@@ -197,6 +200,8 @@ public class Player extends Actor
             } else {
                 if( "h".equals(Greenfoot.getKey()) || "H".equals(Greenfoot.getKey()) ) {
                     ((SantaElena) getWorld()).hireBlacksmith();
+                    ((SantaElena) getWorld()).removeWorkerDialog();
+                    ((SantaElena) getWorld()).displayDialog("Blacksmith");
                 } // end if
             } // end if
         } else if ( currentColor.equals( Color.green) ) {
@@ -221,6 +226,8 @@ public class Player extends Actor
             } else {
                 if( "h".equals(Greenfoot.getKey()) || "H".equals(Greenfoot.getKey()) ) {
                     ((SantaElena) getWorld()).hireMerchant();
+                    ((SantaElena) getWorld()).removeWorkerDialog();
+                    ((SantaElena) getWorld()).displayDialog("Merchant");
                 } // end if
             } // end if
         } else {

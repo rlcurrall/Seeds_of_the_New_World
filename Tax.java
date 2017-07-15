@@ -13,7 +13,7 @@ public class Tax extends Actor
     /* FIELDS */
     /*******************************************************************************************************/
     String job;
-    int level;
+    int level = 1;
     int tax;
     Color background = new Color(0xffcc66);
     
@@ -22,40 +22,14 @@ public class Tax extends Actor
     /*******************************************************************************************************/
     public Tax(String job) {
         this.job = job;
+        calcTax();
+        display();
     } // end Tax constructor
     
     /*******************************************************************************************************/
     /* METHODS */
     /*******************************************************************************************************/
-    /**
-     * Act - do whatever the Cost wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
-    {
-        getLevel();
-    }
-    
-    /**
-     * getLevel - get the level of the worker from the SantaElena world
-     */
-    private void getLevel() {
-        int oldLevel = level;
-        if (job == "Farmer") {
-            level = ((SantaElena) getWorld()).getLevelFarmer();
-        } else if (job == "Blacksmith") {
-            level = ((SantaElena) getWorld()).getLevelBlacksmith();
-        } else if (job == "Merchant") {
-            level = ((SantaElena) getWorld()).getLevelMerchant();
-        } // end else-if block
         
-        // update background if the level has changed
-        if (level != oldLevel) {
-            calcTax();
-            display();
-        } // end if
-    } // end getLevel method
-    
     /**
      * calcTax - calculate the montly income tax collected from worker
      */
@@ -75,4 +49,13 @@ public class Tax extends Actor
     private void display() {
         setImage( new GreenfootImage("Montly Taxes:\t" + tax + " Reals", 12, Color.black, background));
     } // end display method
+    
+    /**
+     * setLevel -   public function that allows user to set the level, and updates the values.
+     */
+    public void setLevel(int newLevel) {
+        level = newLevel;
+        calcTax();
+        display();
+    } // end setLevel method
 } // end Tax class

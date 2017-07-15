@@ -32,9 +32,9 @@ public class Treasury extends Actor
     private int merchantTaxes = 200;
     
     // Variables used to determine workers wages
-    private int farmerLevel;
-    private int blacksmithLevel;
-    private int merchantLevel;
+    private int farmerLevel = 0;
+    private int blacksmithLevel = 0;
+    private int merchantLevel = 0;
     
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
@@ -44,9 +44,9 @@ public class Treasury extends Actor
         gold = 300;
         taxPeriod = 0;
         month = 0;
-        farmerLevel = 0;
-        blacksmithLevel = 0;
-        merchantLevel = 0;
+        //farmerLevel = 0;
+        //blacksmithLevel = 0;
+        //merchantLevel = 0;
         farmerHired = false;
         blacksmithHired = false;
         merchantHired = false;
