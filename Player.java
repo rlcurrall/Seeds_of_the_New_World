@@ -1,5 +1,6 @@
 import greenfoot.*;
 import java.awt.*;
+import java.util.*;
 
 /**
  * Write a description of class Player here.
@@ -45,6 +46,7 @@ public class Player extends Actor
      */
     public void act() 
     {
+        checkQuit();
         // determine which arrow keys are being pushed
         arrowKeys();
         // move character 3px in the direction of the arrow key being pressed
@@ -230,6 +232,10 @@ public class Player extends Actor
                     ((SantaElena) getWorld()).displayDialog("Merchant");
                 } // end if
             } // end if
+        } else if ( currentColor.equals( Color.white ) ) {
+            if ( "enter".equals( Greenfoot.getKey() ) ) {
+                ((SantaElena) getWorld()).priestDialog();
+            }
         } else {
             if (!dialogRemoved){
                 ((SantaElena) getWorld()).removeWorkerDialog();
@@ -238,4 +244,15 @@ public class Player extends Actor
             hmmPlayed = false;
         }
     } // end dialog method
+    
+    /**
+     * checkQuit - if player presses the q key restart the game
+     */
+    public void checkQuit() {
+        if( Greenfoot.isKeyDown("q") || Greenfoot.isKeyDown("Q") ) {
+            Start start = new Start();
+            ((SantaElena) getWorld()).background.stop();
+            Greenfoot.setWorld(start);
+        } // end if
+    } // end checkQuit method
 } // end Player class

@@ -1,5 +1,8 @@
 #BlueJ class context
 comment0.params=
 comment0.target=GameOver()
-comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ GameOver.\r\n\ \r\n
-numComments=1
+comment0.text=\r\n\ Constructor\ -\ Set\ the\ dimensions\ for\ the\ world\r\n
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\r\n\ Act\ -\ Check\ if\ player\ pressed\ the\ ENTER\ key,\ if\ so\ restart\ the\ game.\r\n
+numComments=2

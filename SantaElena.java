@@ -34,6 +34,25 @@ public class SantaElena extends World
     Blacksmith blacksmith = new Blacksmith();
     Merchant merchant = new Merchant();
     
+    // Create UI objects
+    Gold goldUI = new Gold(gold);
+    Date dateUI = new Date();
+    
+    // List of facts that Priest will say
+    List<String> facts = Arrays.asList(
+        "Santa Elena was the first colonial\ncapital of Spanish Florida, and\nwas founded in 1566!",
+        "Pedro Menendez de Aviles was appointed\nadelantado, or governor, of Spanish\nFlorida in 1565 and was ordered to\nestablish military bases on the\nFlorida mainland.",
+        "Adelantado was an elite military and\nadministrative position created when\nthe Christian Spaniards took the\nIberian Peninsula back from the\nMuslim Moors.",
+        "In return for the adelantado's work,\nthe Spanish crown granted the\nindividual economic privileges and honors.",
+        "Ponce de Leon, Lucas Vasquez de\nAyllon, Panfilo de Narvaez, Hernando\nde Soto, and Tristan de Luna y Arellano\nwere all adelantados.",
+        "Menendez is best known for founding\nSt. Augustine, the oldest continuously\noccupied Eropean city in the continental\nUnited States.",
+        "Before Menendez arrived, his French\nrival, Jean Ribault, founded\nCharlesfort on Parris Island in 1562\nand claimed the land for France.",
+        "The settlers of Santa Elena have not\nbeen on friendly terms with the\nNative Americans in the region - the\nOrista and Guale tribes.",
+        "A fire destroyed the fort in 1571.\nMenendez's son-in-law, Don Diego\nde Velasco, oversaw the construction of\nthe new fort, named San Felipe.",
+        "Menendez passed away in 1574, and\nthe title of adelantado passed on\nto you, Hernando de Miranda, his daughter\nCatalina's husband.");
+    // used to get random number
+    Random rand = new Random();
+    
     /*******************************************************************************************************/
     /* CONSTRUCTORS */
     /*******************************************************************************************************/
@@ -81,6 +100,10 @@ public class SantaElena extends World
         // Add Player object
         addObject( player, 575, 240 );
         
+        // Add UI objects
+        addObject( goldUI, 75, 620 );
+        addObject( dateUI, 72, 640 );
+        
         // Add Sign objects
         // addObject( farmerSign, x, x);
         // addObject( blacksmithSign, x, x);
@@ -96,45 +119,75 @@ public class SantaElena extends World
      * displayDialog -  Adds a Cost/Tax/Value object into the world if they do not already exist
      */
     public void displayDialog(String job) {
+        // Variables used to calculate and set locations
+        GreenfootImage image;
+        int width;
+        
+        // check if objects exist in the world
+        List<Name> name = this.getObjects(Name.class);
+        List<Cost> cost = this.getObjects(Cost.class);
+        
+        // check worker Level, if 0 set local value to 1 for display purposes, then update cost
+        int workerLevel = treasury.getLevel(job);
+        if (workerLevel == 0) {
+            workerLevel = 1;
+        } // end if
+        if ( cost.size() > 0 ) {
+            cost.get(0).setLevel(workerLevel);
+        } // end if
+        
         if ( treasury.checkHired(job) ) {
             // check if objects exist in world
-            List name = this.getObjects(Name.class);
-            List cost = this.getObjects(Cost.class);
-            List tax = this.getObjects(Tax.class);
-            List value = this.getObjects(Value.class);
+            List<Tax> tax = this.getObjects(Tax.class);
+            List<Value> value = this.getObjects(Value.class);
+            
+            // update tax and value 
+            if ( tax.size() > 0 ) {
+                tax.get(0).setLevel(workerLevel);
+            } // end if
+            if ( value.size() > 0 ) {
+                value.get(0).setLevel(workerLevel);
+            } // end if
             
             // create and add objects to the world
             if ( name.isEmpty() ) {
                 Name workerName = new Name(job);
-                addObject( workerName, 100, 80 );
+                image = workerName.getImage();
+                width = image.getWidth();
+                addObject( workerName, 250 + width/2, 600 );
             } // end if
             if ( cost.isEmpty() ) {
                 Cost workerCost = new Cost(job);
-                addObject( workerCost , 100, 120 );
+                image = workerCost.getImage();
+                width = image.getWidth();
+                addObject( workerCost , 260 + width/2, 620 );
             } // end if
             if ( tax.isEmpty() ) {
                 Tax workerTax = new Tax(job);
-                addObject( workerTax, 100, 140);
+                image = workerTax.getImage();
+                width = image.getWidth();
+                addObject( workerTax, 260 + width/2, 635);
             } // end if
             if ( value.isEmpty() ) {
                 Value workerValue = new Value(job);
-                addObject( workerValue, 100, 160);
+                image = workerValue.getImage();
+                width = image.getWidth();
+                addObject( workerValue, 260 + width/2, 650);
             } // end if
-        } else {
-            // check if objects exist in world
-            List name = this.getObjects(Name.class);
-            List cost = this.getObjects(Cost.class);
-            
-            // create and add objects to the world
+        } else {// create and add objects to the world
             if ( name.isEmpty() ) {
                 Name workerName = new Name(job);
-                addObject( workerName, 100, 100);
+                image = workerName.getImage();
+                width = image.getWidth();
+                addObject( workerName, 250 + width/2, 600);
             } // end if
             if ( cost.isEmpty() ) {
                 Cost workerCost = new Cost(job);
-                addObject( workerCost, 100, 110);
+                image = workerCost.getImage();
+                width = image.getWidth();
+                addObject( workerCost, 260 + width/2, 620);
             } // end if
-        }
+        } // end else-if block
     } // end displayFarmerDialog method
     
     // REMOVE WORKER DIALOG
@@ -162,6 +215,28 @@ public class SantaElena extends World
             this.removeObjects(value);
         } // end if
     } // end removeFarmerDialog method
+    
+    /**
+     * priestDialog -
+     */
+    public void priestDialog() {
+        // remove any fact on the screen
+        List<Fact> oldFact = this.getObjects(Fact.class);
+        for ( Fact f : oldFact ) {
+            removeObject(f);
+        } // end for each loop
+        
+        // get random number between 0 and 9
+        int n = rand.nextInt(10);
+        int counter = 0;
+        
+        // retrieve fact
+        String text = facts.get(n);
+        
+        Fact fact = new Fact(text);
+        addObject( fact, 200 + fact.getImage().getWidth()/2, 20 + fact.getImage().getHeight()/2);
+        System.out.println("shown");
+    } // end priestDialog method
     
     /*******************************************************************************************************/
     /* TREASURY GETTERS & SETTERS */
@@ -234,6 +309,26 @@ public class SantaElena extends World
      */
     public void giveRaiseFarmer() {
         boolean res = treasury.giveRaise("Farmer");
+        
+        if ( res ) {
+            // removeObject( merchantSign, x, x);
+            // addObject( merchant, x, x);
+            List<Cost> cost = this.getObjects(Cost.class);
+            List<Tax> tax = this.getObjects(Tax.class);
+            List<Value> value = this.getObjects(Value.class);
+            int newLevel = treasury.getLevel("Farmer");
+            if (cost.size() > 0) {
+                Cost wC = cost.get(0);
+                Tax wT = tax.get(0);
+                Value wV = value.get(0);
+                
+                wC.setLevel( newLevel );
+                wT.setLevel( newLevel );
+                wV.setLevel( newLevel );
+            } // end if
+        } else {
+            // handle error
+        } // end else-if block
     } // end giveRaiseFarmer method
     
     /**
@@ -242,6 +337,18 @@ public class SantaElena extends World
      */
     public void giveRaiseBlacksmith() {
         boolean res = treasury.giveRaise("Blacksmith");
+        
+        if ( res ) {
+            // removeObject( merchantSign, x, x);
+            // addObject( merchant, x, x);
+            List<Cost> cost = this.getObjects(Cost.class);
+            if (cost.size() > 0) {
+                Cost worker = cost.get(0);
+                worker.setLevel( treasury.getLevel("Blacksmith") );
+            } // end if
+        } else {
+            // handle error
+        } // end else-if block
     } // end giveRaiseBlacksmith method
     
     /**
@@ -250,13 +357,25 @@ public class SantaElena extends World
      */
     public void giveRaiseMerchant() {
         boolean res = treasury.giveRaise("Merchant");
+        
+        if ( res ) {
+            // removeObject( merchantSign, x, x);
+            // addObject( merchant, x, x);
+            List<Cost> cost = this.getObjects(Cost.class);
+            if (cost.size() > 0) {
+                Cost worker = cost.get(0);
+                worker.setLevel( treasury.getLevel("Merchant") );
+            } // end if
+        } else {
+            // handle error
+        } // end else-if block
     } // end giveRaiseMerchant method
     
     // GET WORKER LEVEL
     // ERROR IN RETRIEVING THE LEVEL
-	
-	// May no longer be necessary...
-	
+    
+    // May no longer be necessary...
+    
     /**
      * getLevelFarmer -     Gets the Farmer level from the treasury object, will be used by objects
      *                      that exist in the world such as the Cost/Tax/Value objects

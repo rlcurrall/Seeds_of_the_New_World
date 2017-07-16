@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=text
+comment0.target=Fact(java.lang.String)
+comment0.text=\r\n\ Constructor\ -\ set\ the\ image\ to\ the\ text\ inputed\ by\ the\ user.\r\n
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\r\n\ Act\ -\ object\ will\ remove\ itself\ after\ when\ timer\ runs\ out.\r\n
+numComments=2

@@ -20,6 +20,10 @@ public class Tax extends Actor
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
     /*******************************************************************************************************/
+    /**
+     * Constructor - Sets the job to the inputted value, calculates the amount of taxes the worker currently
+     *               pays monthly and displays the amount to the screen
+     */
     public Tax(String job) {
         this.job = job;
         calcTax();
@@ -47,7 +51,7 @@ public class Tax extends Actor
      * display - update the image of the object to show the tax collected each month
      */
     private void display() {
-        setImage( new GreenfootImage("Montly Taxes:\t" + tax + " Reals", 12, Color.black, background));
+        setImage( new GreenfootImage("Montly Taxes:     " + tax + " Reals", 14, Color.black, background));
     } // end display method
     
     /**

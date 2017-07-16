@@ -1,5 +1,8 @@
 #BlueJ class context
-comment0.params=
-comment0.target=void\ act()
-comment0.text=\r\n\ Act\ -\ do\ whatever\ the\ Gold\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-numComments=1
+comment0.params=gold
+comment0.target=Gold(int)
+comment0.text=\r\n\ Constructor\ -\ sets\ the\ gold\ to\ the\ inputted\ value\ and\ sets\ the\ image\ to\ display\ the\ amount.\r\n
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\r\n\ Act\ -\ Sets\ the\ gold\ to\ the\ value\ stored\ in\ the\ SantaElena\ world\ and\ updates\ the\ image\ to\ display\ the\r\n\ \ \ \ \ \ \ value.\r\n
+numComments=2

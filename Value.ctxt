@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.params=job
 comment0.target=Value(java.lang.String)
-comment0.text=
+comment0.text=\r\n\ Constructor\ -\ sets\ the\ job\ of\ the\ Value\ object\ to\ the\ inputted\ variable,\ then\ calculates\ what\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ the\ value\ of\ the\ business\ is\ and\ updates\ the\ image\ to\ display\ the\ value.\r\n
 comment1.params=
 comment1.target=void\ calcValue()
 comment1.text=\r\n\ calcValue\ -\ calculate\ the\ value\ of\ a\ business\ at\ its\ current\ level\r\n

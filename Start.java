@@ -5,7 +5,7 @@ import greenfoot.*;
  *        to the SantaElena world when the user presses enter.
  * 
  * @author Robert Currall 
- * @version 7.11.17
+ * @version 17.7.11
  */
 public class Start extends World
 {
@@ -15,8 +15,7 @@ public class Start extends World
     
     /* CONSTRUCTORS */
     /**
-     * Constructor for objects of class Start.
-     * 
+     * Constructor - Set dimensions for the world
      */
     public Start()
     {    

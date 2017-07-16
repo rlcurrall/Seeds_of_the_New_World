@@ -9,7 +9,9 @@ import greenfoot.*;
  */
 public class Blacksmith extends Actor
 {
+    /*******************************************************************************************************/
     /* FIELDS */
+    /*******************************************************************************************************/
     private int waitCycle = 0;
     private int waitCounter = 0;
     
@@ -18,6 +20,9 @@ public class Blacksmith extends Actor
     GreenfootImage blacksmith2 = new GreenfootImage("Blacksmith-right.png");
     GreenfootImage blacksmith3 = new GreenfootImage("Blacksmith-left.png");
     
+    /*******************************************************************************************************/
+    /* METHODS */
+    /*******************************************************************************************************/
     /**
      * Act - change the image of the actor periodically so it doesn't look static.
      */

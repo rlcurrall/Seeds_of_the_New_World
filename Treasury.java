@@ -39,14 +39,14 @@ public class Treasury extends Actor
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
     /*******************************************************************************************************/
+    /**
+     * Constructor - Initializes the values
+     */
     public Treasury() {
         // set default values
         gold = 300;
         taxPeriod = 0;
         month = 0;
-        //farmerLevel = 0;
-        //blacksmithLevel = 0;
-        //merchantLevel = 0;
         farmerHired = false;
         blacksmithHired = false;
         merchantHired = false;
@@ -56,7 +56,8 @@ public class Treasury extends Actor
     /* METHODS */
     /*******************************************************************************************************/
     /**
-     * collectTaxes -
+     * collectTaxes - Will add gold to the players treasury based on what workers they have hired and what
+     *                they are paying them.
      */
     public void collectTaxes() {
         if( taxPeriod == 600 ) {
@@ -123,22 +124,22 @@ public class Treasury extends Actor
     public boolean giveRaise( String job ) {
         if ( job == "Farmer" && farmerHired && gold >= 200 * farmerLevel ) {
             gold  = gold - ( 200 * farmerLevel );
-            farmerTaxes = (50 * farmerLevel);
             farmerLevel++;
+            farmerTaxes = (50 * farmerLevel);
             return true;
         } else if ( job == "Farmer" && gold < 200 * farmerLevel ) {
             return false;
         } else if ( job == "Blacksmith" && blacksmithHired  && gold >= 400 * blacksmithLevel ) {
             gold = gold - ( 400 * blacksmithLevel );
-            blacksmithTaxes = ( 100 * blacksmithLevel );
             blacksmithLevel++;
+            blacksmithTaxes = ( 100 * blacksmithLevel );
             return true;
         } else if ( job == "Blacksmith" && gold < 400 * blacksmithLevel ) {
             return false;
         } else if ( job == "Merchant" && merchantHired && gold >= 800 * merchantLevel ) {
             gold = gold - ( 800 * merchantLevel );
-            merchantTaxes = ( 200 * merchantLevel );
             merchantLevel++;
+            merchantTaxes = ( 200 * merchantLevel );
             return true;
         } else if ( job == "Merchant" && gold < 800 * merchantLevel ) {
             return false;
@@ -149,7 +150,7 @@ public class Treasury extends Actor
     } // end giveRaise method
     
     /**
-     * fire - ...
+     * fire - WIP... not yet implemented.
      */
     public void fire( String job ) {
         if ( job == "Farmer" && farmerHired ) {

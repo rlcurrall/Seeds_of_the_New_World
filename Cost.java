@@ -13,12 +13,16 @@ public class Cost extends Actor
     /* FIELDS */
     /*******************************************************************************************************/
     String job;
-    int level = 0;
+    int level = 1;
     int cost;
     
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
     /*******************************************************************************************************/
+    /**
+     * Constructor - Sets the job to the inputted value, calculates the Cost to give the worker a raise
+     *               then displays the calculated value to the screen.
+     */
     public Cost(String job) {
         this.job = job;
         calcCost();
@@ -34,11 +38,11 @@ public class Cost extends Actor
      */
     private void calcCost() {
         if (job == "Farmer") {
-            cost = 200 * (level + 1);
+            cost = 200 * (level);
         } else if (job == "Blacksmith") {
-            cost = 400 * (level + 1);
+            cost = 400 * (level);
         } else if (job == "Merchant") {
-            cost = 800 * (level + 1);
+            cost = 800 * (level);
         } // end else-if block
     } // end calcCost method
     
@@ -47,7 +51,7 @@ public class Cost extends Actor
      */
     private void display() {
         Color background = new Color(0xffcc66);
-        setImage( new GreenfootImage("Cost: " + cost + " Reals" , 12, Color.black, background));
+        setImage( new GreenfootImage("Cost:                     " + cost + " Reals" , 14, Color.black, background));
     } // end display method
     
     /**

@@ -9,7 +9,9 @@ import greenfoot.*;
  */
 public class Priest extends Actor
 {
+    /*******************************************************************************************************/
     /* FIELDS */
+    /*******************************************************************************************************/
     public int waitCycle = 0;
     public int waitCounter = 0;
     
@@ -18,6 +20,9 @@ public class Priest extends Actor
     GreenfootImage priest2 = new GreenfootImage("Priest-right.png");
     GreenfootImage priest3 = new GreenfootImage("Priest-left.png");
     
+    /*******************************************************************************************************/
+    /* METHODS */
+    /*******************************************************************************************************/
     /**
      * Act - change the image of the actor periodically so
      * it doesn't look static.
@@ -43,5 +48,5 @@ public class Priest extends Actor
         else {
             waitCounter++;
         } // end else
-    }    
-}
+    } // end act method
+} // end Priest class

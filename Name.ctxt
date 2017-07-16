@@ -1,5 +1,5 @@
 #BlueJ class context
 comment0.params=job
 comment0.target=Name(java.lang.String)
-comment0.text=
+comment0.text=\r\n\ Constructor\ -\ Sets\ the\ job\ to\ the\ inputted\ value,\ then\ updates\ the\ image\ to\ show\ the\ value\ stored\r\n\ in\ the\ job\ variable.\r\n
 numComments=1

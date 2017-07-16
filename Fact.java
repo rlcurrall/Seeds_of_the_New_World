@@ -2,40 +2,39 @@ import greenfoot.*;
 import java.awt.*;
 
 /**
- * Write a description of class Gold here.
+ * Write a description of class Fact here.
  * 
- * @author Robert Currall 
+ * @author Robert Currall
  * @version 17.7.16
  */
-public class Gold extends Actor
+public class Fact extends Actor
 {
     /*******************************************************************************************************/
     /* FIELDS */
     /*******************************************************************************************************/
-    int gold;
-    
-    Color background = new Color(0xffcc66);
+    int count = 1000;
     
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
     /*******************************************************************************************************/
     /**
-     * Constructor - sets the gold to the inputted value and sets the image to display the amount.
+     * Constructor - set the image to the text inputed by the user.
      */
-    public Gold(int gold) {
-        this.gold = gold;
-        setImage( new GreenfootImage("Gold: " + gold + " Reals", 20, Color.black, background) );
-    } // end Gold constructor
+    public Fact(String text) {
+        setImage( new GreenfootImage( text, 14, Color.black, Color.white ) );
+    } // end Fact constructor   
     
     /*******************************************************************************************************/
     /* METHODS */
     /*******************************************************************************************************/
     /**
-     * Act - Sets the gold to the value stored in the SantaElena world and updates the image to display the
-     *       value.
+     * Act - object will remove itself after when timer runs out.
      */
     public void act() {
-        gold = ((SantaElena) getWorld()).gold;
-        setImage( new GreenfootImage("Gold: " + gold + " Reals", 20, Color.black, background) );
+        if ( count == 0 ) {
+            getWorld().removeObject(this);
+        } else {
+            count--;
+        } // end else-if block
     } // end act method
-} // end Gold class
+} // end Fact class

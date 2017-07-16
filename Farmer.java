@@ -9,7 +9,9 @@ import greenfoot.*;
  */
 public class Farmer extends Actor
 {
+    /*******************************************************************************************************/
     /* FIELDS */
+    /*******************************************************************************************************/
     public int waitCycle = 0;
     public int waitCounter = 0;
     
@@ -18,6 +20,9 @@ public class Farmer extends Actor
     GreenfootImage farmer2 = new GreenfootImage("Farmer-right.png");
     GreenfootImage farmer3 = new GreenfootImage("Farmer-left.png");
     
+    /*******************************************************************************************************/
+    /* METHODS */
+    /*******************************************************************************************************/
     /**
      * Act - change the image of the actor periodically so it doesn't look static.
      */

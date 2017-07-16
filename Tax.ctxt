@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.params=job
 comment0.target=Tax(java.lang.String)
-comment0.text=
+comment0.text=\r\n\ Constructor\ -\ Sets\ the\ job\ to\ the\ inputted\ value,\ calculates\ the\ amount\ of\ taxes\ the\ worker\ currently\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pays\ monthly\ and\ displays\ the\ amount\ to\ the\ screen\r\n
 comment1.params=
 comment1.target=void\ calcTax()
 comment1.text=\r\n\ calcTax\ -\ calculate\ the\ montly\ income\ tax\ collected\ from\ worker\r\n

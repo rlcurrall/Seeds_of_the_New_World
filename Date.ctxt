@@ -1,5 +1,11 @@
 #BlueJ class context
 comment0.params=
-comment0.target=void\ act()
-comment0.text=\r\n\ Act\ -\ do\ whatever\ the\ Date\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-numComments=1
+comment0.target=Date()
+comment0.text=\r\n\ Constructor\ -\ sets\ the\ image\ of\ the\ Date\ object\ to\ the\ initialized\ value.\r\n
+comment1.params=
+comment1.target=void\ act()
+comment1.text=\r\n\ act\ -\ will\ check\ the\ date\ stored\ in\ the\ SantaElena\ world\ and\ then\ update\ the\ image\ of\ the\ object\r\n
+comment2.params=
+comment2.target=void\ update()
+comment2.text=\r\n\ update\ -\ update\ the\ image\ of\ the\ Date\ object\r\n
+numComments=3

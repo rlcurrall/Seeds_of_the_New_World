@@ -21,6 +21,10 @@ public class Value extends Actor
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
     /*******************************************************************************************************/
+    /**
+     * Constructor - sets the job of the Value object to the inputted variable, then calculates what
+     *               the value of the business is and updates the image to display the value.
+     */
     public Value(String job) {
         this.job = job;
         calcValue();
@@ -49,7 +53,7 @@ public class Value extends Actor
      *           sells the business.
      */
     private void display() {
-        setImage( new GreenfootImage("Business Value: " + value + " Reals", 12, Color.black, background));
+        setImage( new GreenfootImage("Business Value: " + value + " Reals", 14, Color.black, background));
     } // end display method    
     
     /**
