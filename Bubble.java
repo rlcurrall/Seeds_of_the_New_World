@@ -3,17 +3,28 @@ import greenfoot.*;
 /**
  * Write a description of class Bubble here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Robert Currall
+ * @version 17.7.17
  */
 public class Bubble extends Actor
 {
+    /*******************************************************************************************************/
+    /* FIELDS */
+    /*******************************************************************************************************/
+    int count = 400;
+    
+    /*******************************************************************************************************/
+    /* METHODS */
+    /*******************************************************************************************************/
     /**
-     * Act - do whatever the Bubble wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Act - object will remove itself after timer runs out. 
      */
     public void act() 
     {
-        // Add your action code here.
-    }    
-}
+        if ( count == 0 ) {
+            getWorld().removeObject(this);
+        } else {
+            count--;
+        } // end else-if block
+    } // end act method
+} // end Fact class

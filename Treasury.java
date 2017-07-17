@@ -77,14 +77,22 @@ public class Treasury extends Actor
             gold = gold + collections;
             
             // play sound and reset sound period
-            ping.setVolume(20);
+            ping.setVolume(80);
             ping.play();
             taxPeriod = 0;
             month++;
         } else {
             taxPeriod++;
-        }
-    }
+        } // end else-if block
+    } // end collectTaxes method
+    
+    /**
+     * donate - When player speaks with the Priest the priest will make a donation to the success of the
+     *          settlement.
+     */
+    public void donate() {
+        gold = gold + 10;
+    } // end donate method
     
     /**
      * hire -   If Worker not already hired, hire the worker, and subtract cost from gold

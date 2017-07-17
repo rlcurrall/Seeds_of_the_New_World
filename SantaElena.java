@@ -217,25 +217,31 @@ public class SantaElena extends World
     } // end removeFarmerDialog method
     
     /**
-     * priestDialog -
+     * priestDialog - Used to display random facts when the player speaks with the priest, and will give the player 
+     *                10 Reals. 
      */
     public void priestDialog() {
         // remove any fact on the screen
         List<Fact> oldFact = this.getObjects(Fact.class);
+        /*
         for ( Fact f : oldFact ) {
             removeObject(f);
         } // end for each loop
+        */
         
-        // get random number between 0 and 9
-        int n = rand.nextInt(10);
-        int counter = 0;
-        
-        // retrieve fact
-        String text = facts.get(n);
-        
-        Fact fact = new Fact(text);
-        addObject( fact, 200 + fact.getImage().getWidth()/2, 20 + fact.getImage().getHeight()/2);
-        System.out.println("shown");
+        if (oldFact.size() == 0) {
+            // Get a random element from the facts List
+            int n = rand.nextInt(10);
+            String text = facts.get(n);
+            
+            // Create new fact object and display in the world and add 10 gold to the treasury.
+            Fact fact = new Fact(text);
+            Bubble bubble = new Bubble();
+            // addObject( fact, 200 + fact.getImage().getWidth()/2, 20 + fact.getImage().getHeight()/2 );
+            addObject( bubble, 280 + bubble.getImage().getWidth()/2, 40 + bubble.getImage().getHeight()/2);
+            addObject( fact, 290 + 3*bubble.getImage().getWidth()/5, 40 + bubble.getImage().getHeight()/3);
+            treasury.donate();
+        } // end if
     } // end priestDialog method
     
     /*******************************************************************************************************/
