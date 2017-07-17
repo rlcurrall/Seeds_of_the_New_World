@@ -139,8 +139,8 @@ public class Player extends Actor
         // Color object to assign value of color at given point
         currentColor = border.getColorAt( getX() + checkX, getY() + checkY);
         
-        // teturn TRUE or FALSE depending on color in currentColor
-        if ( currentColor.equals( Color.black ) ) {
+        // teturn TRUE or FALSE depending on color in currentColor and if there is already an actor there
+        if ( currentColor.equals( Color.black ) || getOneObjectAtOffset( checkX, checkY, Actor.class ) != null) {
             return false;
         } else {
             return true;
@@ -180,7 +180,7 @@ public class Player extends Actor
                     ((SantaElena) getWorld()).displayDialog("Farmer");
                 } // end if
             } // end if
-        } else if ( currentColor.equals( Color.red ) ) {
+        } else if ( currentColor.equals( Color.green ) ) {
             // Blacksmith
             dialogRemoved = false;
             boolean isHired = ((SantaElena) getWorld()).treasury.checkHired("Blacksmith");
@@ -206,7 +206,7 @@ public class Player extends Actor
                     ((SantaElena) getWorld()).displayDialog("Blacksmith");
                 } // end if
             } // end if
-        } else if ( currentColor.equals( Color.green) ) {
+        } else if ( currentColor.equals( Color.red) ) {
             // Merchant
             dialogRemoved = false;
             boolean isHired = ((SantaElena) getWorld()).treasury.checkHired("Merchant");

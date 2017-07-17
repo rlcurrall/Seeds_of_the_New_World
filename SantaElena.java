@@ -33,6 +33,7 @@ public class SantaElena extends World
     Farmer farmer = new Farmer();
     Blacksmith blacksmith = new Blacksmith();
     Merchant merchant = new Merchant();
+    Priest priest = new Priest();
     
     // Create UI objects
     Gold goldUI = new Gold(gold);
@@ -94,20 +95,24 @@ public class SantaElena extends World
      * Prepare -    populate world with objects defined above
      */
     public void prepare() {
+        // Initiate values
         gold = 0;
         month = 0;
-        
-        // Add Player object
-        addObject( player, 575, 240 );
         
         // Add UI objects
         addObject( goldUI, 75, 620 );
         addObject( dateUI, 72, 640 );
         
         // Add Sign objects
-        // addObject( farmerSign, x, x);
-        // addObject( blacksmithSign, x, x);
-        // addObject( merchantSign, x, x);
+        addObject( farmerSign, 440, 480 );
+        addObject( blacksmithSign, 225, 475 );
+        addObject( merchantSign, 660, 470 );
+        
+        // Add Priest
+        addObject( priest, 250, 120 );
+        
+        // Add Player object
+        addObject( player, 575, 240 );
     } // end prepare method
     
     /*******************************************************************************************************/
@@ -238,8 +243,8 @@ public class SantaElena extends World
             Fact fact = new Fact(text);
             Bubble bubble = new Bubble();
             // addObject( fact, 200 + fact.getImage().getWidth()/2, 20 + fact.getImage().getHeight()/2 );
-            addObject( bubble, 280 + bubble.getImage().getWidth()/2, 40 + bubble.getImage().getHeight()/2);
-            addObject( fact, 290 + 3*bubble.getImage().getWidth()/5, 40 + bubble.getImage().getHeight()/3);
+            addObject( bubble, 240 + bubble.getImage().getWidth()/2, 40 + bubble.getImage().getHeight()/2);
+            addObject( fact, 250 + 3*bubble.getImage().getWidth()/5, 40 + bubble.getImage().getHeight()/3);
             treasury.donate();
         } // end if
     } // end priestDialog method
@@ -256,8 +261,8 @@ public class SantaElena extends World
         boolean res = treasury.hire("Farmer");
         
         if ( res ) {
-            // removeObject( farmerSign, x, x);
-            // addObject( farmer, x, x);
+            removeObject( farmerSign );
+            addObject( farmer, 440, 480 );
             List<Cost> cost = this.getObjects(Cost.class);
             if (cost.size() > 0) {
                 Cost worker = cost.get(0);
@@ -276,8 +281,8 @@ public class SantaElena extends World
         boolean res = treasury.hire("Blacksmith");
         
         if ( res ) {
-            // removeObject( blacksmithSign, x, x);
-            // addObject( blacksmith, x, x);
+            removeObject( blacksmithSign );
+            addObject( blacksmith, 225, 475 );
             List<Cost> cost = this.getObjects(Cost.class);
             if (cost.size() > 0) {
                 Cost worker = cost.get(0);
@@ -296,8 +301,8 @@ public class SantaElena extends World
         boolean res = treasury.hire("Merchant");
         
         if ( res ) {
-            // removeObject( merchantSign, x, x);
-            // addObject( merchant, x, x);
+            removeObject( merchantSign );
+            addObject( merchant, 660, 470 );
             List<Cost> cost = this.getObjects(Cost.class);
             if (cost.size() > 0) {
                 Cost worker = cost.get(0);
