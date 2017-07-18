@@ -39,6 +39,23 @@ public class SantaElena extends World
     Gold goldUI = new Gold(gold);
     Date dateUI = new Date();
     
+    // Key UI objects
+    // for quit
+    Button q = new Button("quit");
+    ButtonText qT = new ButtonText("quit");
+    
+    // for hire
+    Button h = new Button("hire");
+    ButtonText hT = new ButtonText("hire");
+    
+    // for raise
+    Button r = new Button("raise");
+    ButtonText rT = new ButtonText("raise");
+    
+    // for Priest's random facts
+    Button enter = new Button("fact");
+    ButtonText enterT = new ButtonText("fact");
+    
     // List of facts that Priest will say
     List<String> facts = Arrays.asList(
         "Santa Elena was the first colonial\ncapital of Spanish Florida, and\nwas founded in 1566!",
@@ -103,6 +120,10 @@ public class SantaElena extends World
         addObject( goldUI, 75, 620 );
         addObject( dateUI, 72, 640 );
         
+        // Add quit key image
+        addObject( q, 550, 630 );
+        addObject( qT, 620, 630 );
+        
         // Add Sign objects
         addObject( farmerSign, 440, 480 );
         addObject( blacksmithSign, 225, 475 );
@@ -124,6 +145,10 @@ public class SantaElena extends World
      * displayDialog -  Adds a Cost/Tax/Value object into the world if they do not already exist
      */
     public void displayDialog(String job) {
+        // remove current button images
+        removeObject(q);
+        removeObject(qT);
+        
         // Variables used to calculate and set locations
         GreenfootImage image;
         int width;
@@ -145,6 +170,10 @@ public class SantaElena extends World
             // check if objects exist in world
             List<Tax> tax = this.getObjects(Tax.class);
             List<Value> value = this.getObjects(Value.class);
+            
+            // add raise button object
+            addObject( r, 550, 630 );
+            addObject( rT, 620, 630 );
             
             // update tax and value 
             if ( tax.size() > 0 ) {
@@ -180,6 +209,10 @@ public class SantaElena extends World
                 addObject( workerValue, 260 + width/2, 650);
             } // end if
         } else {// create and add objects to the world
+            // Add quit key image
+            addObject( h, 550, 630 );
+            addObject( hT, 600, 630 );
+            
             if ( name.isEmpty() ) {
                 Name workerName = new Name(job);
                 image = workerName.getImage();
@@ -205,6 +238,18 @@ public class SantaElena extends World
         List cost = this.getObjects(Cost.class);
         List tax = this.getObjects(Tax.class);
         List value = this.getObjects(Value.class);
+        List<Button> buttons = this.getObjects(Button.class);
+        List<ButtonText> buttonTexts = this.getObjects(ButtonText.class);
+        
+        // remove all buttons from the screen
+        for ( Button b : buttons ) {
+            removeObject(b);
+        } // end for each loop
+        
+        // remove all buttonText objects from the screen
+        for ( ButtonText bt : buttonTexts ) {
+            removeObject(bt);
+        } // end for each loop
         
         // if objects exist remove them
         if (!name.isEmpty()) {
@@ -219,6 +264,12 @@ public class SantaElena extends World
         if (!value.isEmpty()) {
             this.removeObjects(value);
         } // end if
+        
+        // Add quit key image
+        addObject( q, 550, 630 );
+        addObject( qT, 620, 630 );
+        
+        
     } // end removeFarmerDialog method
     
     /**
@@ -248,6 +299,19 @@ public class SantaElena extends World
             treasury.donate();
         } // end if
     } // end priestDialog method
+    
+    /**
+     * showPriestDir - Will display the directions for interacting with the priest 
+     */
+    public void showPriestDir() {
+        // remove current button images
+        removeObject(q);
+        removeObject(qT);
+        
+        // Add enter key image
+        addObject( enter, 350, 630 );
+        addObject( enterT, 480, 630 );
+    } // end showPriestDir method
     
     /*******************************************************************************************************/
     /* TREASURY GETTERS & SETTERS */

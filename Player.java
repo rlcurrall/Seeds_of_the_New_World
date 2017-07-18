@@ -148,7 +148,8 @@ public class Player extends Actor
     } // end checkClear method
     
     /**
-     * dialog -     something.
+     * dialog - Determines where the player is standing, if the player is in one of the colored areas, then
+     *          display the appropriate dialog
      */
     public void dialog() {
         // get color at Player's current location
@@ -233,6 +234,8 @@ public class Player extends Actor
                 } // end if
             } // end if
         } else if ( currentColor.equals( Color.white ) ) {
+            // ((SantaElena) getWorld()).removeWorkerDialog();
+            // ((SantaElena) getWorld()).showPriestDir();
             if ( "enter".equals( Greenfoot.getKey() ) ) {
                 ((SantaElena) getWorld()).priestDialog();
             }

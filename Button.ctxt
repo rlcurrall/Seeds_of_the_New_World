@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=action
+comment0.target=Button(java.lang.String)
+comment0.text=\r\n\ Constructor\ -\ Takes\ a\ string\ input\ that\ determines\ the\ action\ associated\ with\ the\ key\ and\ sets\ the\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ image\ to\ the\ key\ image\ associated\ with\ that\ action\r\n
+numComments=1
