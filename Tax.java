@@ -24,9 +24,9 @@ public class Tax extends Actor
      * Constructor - Sets the job to the inputted value, calculates the amount of taxes the worker currently
      *               pays monthly and displays the amount to the screen
      */
-    public Tax(String job) {
+    public Tax(String job, int tax) {
         this.job = job;
-        calcTax();
+        this.tax = tax;
         display();
     } // end Tax constructor
     
@@ -57,9 +57,9 @@ public class Tax extends Actor
     /**
      * setLevel -   public function that allows user to set the level, and updates the values.
      */
-    public void setLevel(int newLevel) {
+    public void setLevel(int newLevel, int tax) {
         level = newLevel;
-        calcTax();
+        this.tax = tax;
         display();
     } // end setLevel method
 } // end Tax class

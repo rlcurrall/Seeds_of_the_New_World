@@ -157,74 +157,91 @@ public class SantaElena extends World
         List<Name> name = this.getObjects(Name.class);
         List<Cost> cost = this.getObjects(Cost.class);
         
-        // check worker Level, if 0 set local value to 1 for display purposes, then update cost
-        int workerLevel = treasury.getLevel(job);
-        if (workerLevel == 0) {
-            workerLevel = 1;
-        } // end if
-        if ( cost.size() > 0 ) {
-            cost.get(0).setLevel(workerLevel);
-        } // end if
+        if (job != "Priest") {
+            // check worker Level, if 0 set local value to 1 for display purposes, then update cost
+            int workerLevel = treasury.getLevel(job);
+            int calcTax = treasury.getTax(job);
+            if (workerLevel == 0) {
+                workerLevel = 1;
+            } // end if
+            if ( cost.size() > 0 ) {
+                cost.get(0).setLevel(workerLevel);
+            } // end if
         
-        if ( treasury.checkHired(job) ) {
-            // check if objects exist in world
-            List<Tax> tax = this.getObjects(Tax.class);
-            List<Value> value = this.getObjects(Value.class);
+            if ( treasury.checkHired(job) ) {
+                // check if objects exist in world
+                List<Tax> tax = this.getObjects(Tax.class);
+                List<Value> value = this.getObjects(Value.class);
+                
+                // add raise button object
+                addObject( r, 550, 630 );
+                addObject( rT, 620, 630 );
             
-            // add raise button object
-            addObject( r, 550, 630 );
-            addObject( rT, 620, 630 );
+                // update tax and value 
+                if ( tax.size() > 0 ) {
+                    tax.get(0).setLevel(workerLevel, calcTax);
+                } // end if
+                if ( value.size() > 0 ) {
+                    value.get(0).setLevel(workerLevel);
+                } // end if
             
-            // update tax and value 
-            if ( tax.size() > 0 ) {
-                tax.get(0).setLevel(workerLevel);
-            } // end if
-            if ( value.size() > 0 ) {
-                value.get(0).setLevel(workerLevel);
-            } // end if
+                // create and add objects to the world
+                if ( name.isEmpty() ) {
+                    Name workerName = new Name(job);
+                    image = workerName.getImage();
+                    width = image.getWidth();
+                    addObject( workerName, 250 + width/2, 600 );
+                } // end if
+                if ( cost.isEmpty() ) {
+                    Cost workerCost = new Cost(job);
+                    image = workerCost.getImage();
+                    width = image.getWidth();
+                    addObject( workerCost , 260 + width/2, 620 );
+                } // end if
+                if ( tax.isEmpty() ) {
+                    Tax workerTax = new Tax(job, calcTax);
+                    image = workerTax.getImage();
+                    width = image.getWidth();
+                    addObject( workerTax, 260 + width/2, 635);
+                } // end if
+                if ( value.isEmpty() ) {
+                    Value workerValue = new Value(job);
+                    image = workerValue.getImage();
+                    width = image.getWidth();
+                    addObject( workerValue, 260 + width/2, 650);
+                } // end if
+            } else {// create and add objects to the world
+                // Add quit key image
+                addObject( h, 550, 630 );
+                addObject( hT, 600, 630 );
             
-            // create and add objects to the world
+                if ( name.isEmpty() ) {
+                    Name workerName = new Name(job);
+                    image = workerName.getImage();
+                    width = image.getWidth();
+                    addObject( workerName, 250 + width/2, 600);
+                } // end if
+                if ( cost.isEmpty() ) {
+                    Cost workerCost = new Cost(job);
+                    image = workerCost.getImage();
+                    width = image.getWidth();
+                    addObject( workerCost, 260 + width/2, 620);
+                } // end if
+            } // end else-if block
+        } else {
+            // remove current button images
+            removeObject(q);
+            removeObject(qT);
+            
+            // display name object
             if ( name.isEmpty() ) {
-                Name workerName = new Name(job);
-                image = workerName.getImage();
-                width = image.getWidth();
-                addObject( workerName, 250 + width/2, 600 );
+                Name priestName = new Name(job);
+                addObject( priestName, 250 + priestName.getImage().getWidth()/2, 600 );
             } // end if
-            if ( cost.isEmpty() ) {
-                Cost workerCost = new Cost(job);
-                image = workerCost.getImage();
-                width = image.getWidth();
-                addObject( workerCost , 260 + width/2, 620 );
-            } // end if
-            if ( tax.isEmpty() ) {
-                Tax workerTax = new Tax(job);
-                image = workerTax.getImage();
-                width = image.getWidth();
-                addObject( workerTax, 260 + width/2, 635);
-            } // end if
-            if ( value.isEmpty() ) {
-                Value workerValue = new Value(job);
-                image = workerValue.getImage();
-                width = image.getWidth();
-                addObject( workerValue, 260 + width/2, 650);
-            } // end if
-        } else {// create and add objects to the world
-            // Add quit key image
-            addObject( h, 550, 630 );
-            addObject( hT, 600, 630 );
             
-            if ( name.isEmpty() ) {
-                Name workerName = new Name(job);
-                image = workerName.getImage();
-                width = image.getWidth();
-                addObject( workerName, 250 + width/2, 600);
-            } // end if
-            if ( cost.isEmpty() ) {
-                Cost workerCost = new Cost(job);
-                image = workerCost.getImage();
-                width = image.getWidth();
-                addObject( workerCost, 260 + width/2, 620);
-            } // end if
+            // Add enter key image
+            addObject( enter, 300, 635 );
+            addObject( enterT, 420, 635 );
         } // end else-if block
     } // end displayFarmerDialog method
     
@@ -268,8 +285,6 @@ public class SantaElena extends World
         // Add quit key image
         addObject( q, 550, 630 );
         addObject( qT, 620, 630 );
-        
-        
     } // end removeFarmerDialog method
     
     /**
@@ -279,11 +294,6 @@ public class SantaElena extends World
     public void priestDialog() {
         // remove any fact on the screen
         List<Fact> oldFact = this.getObjects(Fact.class);
-        /*
-        for ( Fact f : oldFact ) {
-            removeObject(f);
-        } // end for each loop
-        */
         
         if (oldFact.size() == 0) {
             // Get a random element from the facts List
@@ -297,21 +307,22 @@ public class SantaElena extends World
             addObject( bubble, 240 + bubble.getImage().getWidth()/2, 40 + bubble.getImage().getHeight()/2);
             addObject( fact, 250 + 3*bubble.getImage().getWidth()/5, 40 + bubble.getImage().getHeight()/3);
             treasury.donate();
+        } else {
+            if (oldFact.get(0).getCount() < 300) {
+                // remove old fact
+                removeObject(oldFact.get(0));
+                
+                // add new fact
+                int n = rand.nextInt(10);
+                String text = facts.get(n);
+                
+                Fact fact = new Fact(text);
+                Bubble bubble = new Bubble();
+                addObject( bubble, 240 + bubble.getImage().getWidth()/2, 40 + bubble.getImage().getHeight()/2);
+                addObject( fact, 250 + 3*bubble.getImage().getWidth()/5, 40 + bubble.getImage().getHeight()/3);
+            } // end if
         } // end if
     } // end priestDialog method
-    
-    /**
-     * showPriestDir - Will display the directions for interacting with the priest 
-     */
-    public void showPriestDir() {
-        // remove current button images
-        removeObject(q);
-        removeObject(qT);
-        
-        // Add enter key image
-        addObject( enter, 350, 630 );
-        addObject( enterT, 480, 630 );
-    } // end showPriestDir method
     
     /*******************************************************************************************************/
     /* TREASURY GETTERS & SETTERS */
@@ -392,13 +403,14 @@ public class SantaElena extends World
             List<Tax> tax = this.getObjects(Tax.class);
             List<Value> value = this.getObjects(Value.class);
             int newLevel = treasury.getLevel("Farmer");
+            int calcTax = treasury.getTax("Farmer");
             if (cost.size() > 0) {
                 Cost wC = cost.get(0);
                 Tax wT = tax.get(0);
                 Value wV = value.get(0);
                 
                 wC.setLevel( newLevel );
-                wT.setLevel( newLevel );
+                wT.setLevel( newLevel, calcTax );
                 wV.setLevel( newLevel );
             } // end if
         } else {
@@ -417,9 +429,18 @@ public class SantaElena extends World
             // removeObject( merchantSign, x, x);
             // addObject( merchant, x, x);
             List<Cost> cost = this.getObjects(Cost.class);
+            List<Tax> tax = this.getObjects(Tax.class);
+            List<Value> value = this.getObjects(Value.class);
+            int newLevel = treasury.getLevel("Blacksmith");
+            int calcTax = treasury.getTax("Blacksmith");
             if (cost.size() > 0) {
-                Cost worker = cost.get(0);
-                worker.setLevel( treasury.getLevel("Blacksmith") );
+                Cost wC = cost.get(0);
+                Tax wT = tax.get(0);
+                Value wV = value.get(0);
+                
+                wC.setLevel( newLevel );
+                wT.setLevel( newLevel, calcTax );
+                wV.setLevel( newLevel );
             } // end if
         } else {
             // handle error
@@ -437,9 +458,18 @@ public class SantaElena extends World
             // removeObject( merchantSign, x, x);
             // addObject( merchant, x, x);
             List<Cost> cost = this.getObjects(Cost.class);
+            List<Tax> tax = this.getObjects(Tax.class);
+            List<Value> value = this.getObjects(Value.class);
+            int newLevel = treasury.getLevel("Merchant");
+            int calcTax = treasury.getTax("Merchant");
             if (cost.size() > 0) {
-                Cost worker = cost.get(0);
-                worker.setLevel( treasury.getLevel("Merchant") );
+                Cost wC = cost.get(0);
+                Tax wT = tax.get(0);
+                Value wV = value.get(0);
+                
+                wC.setLevel( newLevel );
+                wT.setLevel( newLevel, calcTax );
+                wV.setLevel( newLevel );
             } // end if
         } else {
             // handle error
@@ -490,7 +520,7 @@ public class SantaElena extends World
             GameOver lose = new GameOver();
             background.stop();
             Greenfoot.setWorld(lose);
-        } else if ( gold == 200000 ) {
+        } else if ( gold > 200000 ) {
             WinScreen win = new WinScreen();
             background.stop();
             Greenfoot.setWorld(win);

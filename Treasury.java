@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.Random;
 
 /**
  * Write a description of class Treasury here.
@@ -27,14 +28,17 @@ public class Treasury extends Actor
     GreenfootSound ping = new GreenfootSound( "ping.wav" );
     
     // Variables used for paying & collecting money
-    private int farmerTaxes = 50;
-    private int blacksmithTaxes = 100;
-    private int merchantTaxes = 200;
+    private int farmerTaxes;
+    private int blacksmithTaxes;
+    private int merchantTaxes;
     
     // Variables used to determine workers wages
     private int farmerLevel = 0;
     private int blacksmithLevel = 0;
     private int merchantLevel = 0;
+    
+    // Random int generator
+    Random rand = new Random();
     
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
@@ -60,7 +64,7 @@ public class Treasury extends Actor
      *                they are paying them.
      */
     public void collectTaxes() {
-        if( taxPeriod == 600 ) {
+        if( taxPeriod == 400 ) {
             // sum taxes recieved this month
             collections = 0;
             if ( farmerHired ) {
@@ -77,8 +81,10 @@ public class Treasury extends Actor
             gold = gold + collections;
             
             // play sound and reset sound period
-            ping.setVolume(80);
-            ping.play();
+            if ( collections > 0 ) {
+                ping.setVolume(60);
+                ping.play();
+            } // end if
             taxPeriod = 0;
             month++;
         } else {
@@ -101,6 +107,7 @@ public class Treasury extends Actor
         if ( job == "Farmer" && !farmerHired  && gold >= 200 ) {
             farmerHired = true;
             farmerLevel = 1;
+            farmerTaxes = 50;
             gold = gold - 200;
             return true;
         } else if ( job == "Farmer" && gold < 200 ) {
@@ -108,6 +115,7 @@ public class Treasury extends Actor
         } else if ( job == "Blacksmith" && !blacksmithHired && gold >= 400 ) {
             blacksmithHired = true;
             blacksmithLevel = 1;
+            blacksmithTaxes = 100;
             gold = gold - 400;
             return true;
         } else if ( job == "Blacksmith" && gold < 400 ) {
@@ -115,6 +123,7 @@ public class Treasury extends Actor
         }else if ( job == "Merchant" && !merchantHired && gold >= 800 ) {
             merchantHired = true;
             merchantLevel = 1;
+            merchantTaxes = 200;
             gold = gold - 800;
             return true;
         } else if ( job == "Merchant" && gold < 800 ) {
@@ -133,21 +142,27 @@ public class Treasury extends Actor
         if ( job == "Farmer" && farmerHired && gold >= 200 * farmerLevel ) {
             gold  = gold - ( 200 * farmerLevel );
             farmerLevel++;
-            farmerTaxes = (50 * farmerLevel);
+            double n = farmerTaxes + 50 * (rand.nextInt(6) / (double) 10 + 1);
+            int N = (int) n;
+            farmerTaxes = N;
             return true;
         } else if ( job == "Farmer" && gold < 200 * farmerLevel ) {
             return false;
         } else if ( job == "Blacksmith" && blacksmithHired  && gold >= 400 * blacksmithLevel ) {
             gold = gold - ( 400 * blacksmithLevel );
             blacksmithLevel++;
-            blacksmithTaxes = ( 100 * blacksmithLevel );
+            double n = blacksmithTaxes + 100 * (rand.nextInt(6) / (double) 10 + 1);
+            int N = (int) n;
+            blacksmithTaxes = N;
             return true;
         } else if ( job == "Blacksmith" && gold < 400 * blacksmithLevel ) {
             return false;
         } else if ( job == "Merchant" && merchantHired && gold >= 800 * merchantLevel ) {
             gold = gold - ( 800 * merchantLevel );
             merchantLevel++;
-            merchantTaxes = ( 200 * merchantLevel );
+            double n = merchantTaxes + 200 * (rand.nextInt(6) / (double) 10 + 1);
+            int N = (int) n;
+            merchantTaxes = N;
             return true;
         } else if ( job == "Merchant" && gold < 800 * merchantLevel ) {
             return false;
@@ -195,6 +210,22 @@ public class Treasury extends Actor
         // To address error preventing compile
         return 0;
     } // end getLevel method
+    
+    /**
+     * getTax - Returns the value of taxes that the worker will pay
+     */
+    public int getTax(String job) {
+        if (job == "Farmer") {
+            return farmerTaxes;
+        } else if (job == "Blacksmith") {
+            return blacksmithTaxes;
+        } else if (job == "Merchant") {
+            return merchantTaxes;
+        } // end else-if block
+        
+        // return to suppress compilation error
+        return 0;
+    } // end getTax method
     
     /**
      * checkHired - Checks if a worker has been hired, used by displayDialog method in SantaElena

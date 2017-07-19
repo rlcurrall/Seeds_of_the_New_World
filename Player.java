@@ -234,8 +234,8 @@ public class Player extends Actor
                 } // end if
             } // end if
         } else if ( currentColor.equals( Color.white ) ) {
-            // ((SantaElena) getWorld()).removeWorkerDialog();
-            // ((SantaElena) getWorld()).showPriestDir();
+            dialogRemoved = false;
+            ((SantaElena) getWorld()).displayDialog("Priest");
             if ( "enter".equals( Greenfoot.getKey() ) ) {
                 ((SantaElena) getWorld()).priestDialog();
             }

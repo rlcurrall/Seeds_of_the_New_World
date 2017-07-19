@@ -12,7 +12,7 @@ public class Fact extends Actor
     /*******************************************************************************************************/
     /* FIELDS */
     /*******************************************************************************************************/
-    int count = 400;
+    private int count = 600;
     
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
@@ -37,4 +37,11 @@ public class Fact extends Actor
             count--;
         } // end else-if block
     } // end act method
+    
+    /**
+     * getCount - return the value stored in count
+     */
+    public int getCount() {
+        return count;
+    } // end getCount method
 } // end Fact class
