@@ -1,41 +1,49 @@
 import greenfoot.*;
-import java.awt.*;
 
 /**
- * Write a description of class Gold here.
+ * Write a description of class Tutorial here.
  * 
  * @author Robert Currall 
- * @version 17.7.16
+ * @version 17.7.18
  */
-public class Gold extends Actor
+public class Backstory extends World
 {
     /*******************************************************************************************************/
     /* FIELDS */
     /*******************************************************************************************************/
-    int gold;
-    
-    Color background = new Color(0xffcc66);
+    // add music variable
+    GreenfootSound music = new GreenfootSound( "friends.mp3" );
     
     /*******************************************************************************************************/
     /* CONSTRUCTOR */
     /*******************************************************************************************************/
     /**
-     * Constructor - sets the gold to the inputted value and sets the image to display the amount.
+     * Constructor - Sets the dimensions of the world.
      */
-    public Gold(int gold) {
-        this.gold = gold;
-        setImage( new GreenfootImage("Gold: " + gold + " Reales", 20, Color.black, background) );
-    } // end Gold constructor
+    public Backstory()
+    {    
+        super(720, 680, 1); 
+    } // end Tutorial constructor
     
     /*******************************************************************************************************/
     /* METHODS */
     /*******************************************************************************************************/
     /**
-     * Act - Sets the gold to the value stored in the SantaElena world and updates the image to display the
-     *       value.
+     * Act - Check if player pressed the ENTER key, if so move to the next world.
      */
     public void act() {
-        gold = ((SantaElena) getWorld()).gold;
-        setImage( new GreenfootImage("Gold: " + gold + " Reales", 20, Color.black, background) );
+        // start music
+        music.setVolume(10);
+        music.playLoop();
+        
+        // check if player pressed the ENTER key
+        if ( "enter".equals( Greenfoot.getKey() )) {
+            // stop the music
+            music.stop();
+            
+            // change the world
+            Characters characters = new Characters();
+            Greenfoot.setWorld(characters);
+        } // end if        
     } // end act method
-} // end Gold class
+} // end Tutorial class

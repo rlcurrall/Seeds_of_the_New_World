@@ -67,7 +67,7 @@ public class SantaElena extends World
         "Before Menendez arrived, his French\nrival, Jean Ribault, founded\nCharlesfort on Parris Island in 1562\nand claimed the land for France.",
         "The settlers of Santa Elena have not\nbeen on friendly terms with the\nNative Americans in the region - the\nOrista and Guale tribes.",
         "A fire destroyed the fort in 1571.\nMenendez's son-in-law, Don Diego\nde Velasco, oversaw the construction of\nthe new fort, named San Felipe.",
-        "Menendez passed away in 1574, and\nthe title of adelantado passed on\nto you, Hernando de Miranda, his daughter\nCatalina's husband.");
+        "Menendez passed away in 1574, and\nthe title of adelantado passed on\nto his daughter Catalina's husband,\nHernando de Miranda.");
     // used to get random number
     Random rand = new Random();
     

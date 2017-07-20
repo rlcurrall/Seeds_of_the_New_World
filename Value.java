@@ -53,7 +53,7 @@ public class Value extends Actor
      *           sells the business.
      */
     private void display() {
-        setImage( new GreenfootImage("Business Value: " + value + " Reals", 14, Color.black, background));
+        setImage( new GreenfootImage("Business Value: " + value + " Reales", 14, Color.black, background));
     } // end display method    
     
     /**

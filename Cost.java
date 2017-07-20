@@ -51,7 +51,7 @@ public class Cost extends Actor
      */
     private void display() {
         Color background = new Color(0xffcc66);
-        setImage( new GreenfootImage("Cost:                     " + cost + " Reals" , 14, Color.black, background));
+        setImage( new GreenfootImage("Cost:                     " + cost + " Reales" , 14, Color.black, background));
     } // end display method
     
     /**

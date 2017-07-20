@@ -45,7 +45,7 @@ public class Start extends World
      * startGame: Will change world to the SantaElena world when called
      */
     public void startGame() {
-        SantaElena santaElena = new SantaElena();
-        Greenfoot.setWorld(santaElena);
+        Backstory back = new Backstory();
+        Greenfoot.setWorld(back);
     } // end startGame method
 } // end Start class

@@ -33,25 +33,12 @@ public class Tax extends Actor
     /*******************************************************************************************************/
     /* METHODS */
     /*******************************************************************************************************/
-        
-    /**
-     * calcTax - calculate the montly income tax collected from worker
-     */
-    private void calcTax() {
-        if (job == "Farmer") {
-            tax = 50 * level;
-        } else if (job == "Blacksmith") {
-            tax = 100 * level;
-        } else if (job == "Merchant") {
-            tax = 200 * level;
-        } // end else-if block
-    } // end calcCost method
     
     /**
      * display - update the image of the object to show the tax collected each month
      */
     private void display() {
-        setImage( new GreenfootImage("Montly Taxes:     " + tax + " Reals", 14, Color.black, background));
+        setImage( new GreenfootImage("Montly Taxes:     " + tax + " Reales", 14, Color.black, background));
     } // end display method
     
     /**
