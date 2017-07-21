@@ -337,7 +337,7 @@ public class SantaElena extends World
         
         if ( res ) {
             removeObject( farmerSign );
-            addObject( farmer, 440, 480 );
+            addObject( farmer, 440, 475 );
             List<Cost> cost = this.getObjects(Cost.class);
             if (cost.size() > 0) {
                 Cost worker = cost.get(0);
@@ -357,7 +357,7 @@ public class SantaElena extends World
         
         if ( res ) {
             removeObject( blacksmithSign );
-            addObject( blacksmith, 225, 475 );
+            addObject( blacksmith, 225, 470 );
             List<Cost> cost = this.getObjects(Cost.class);
             if (cost.size() > 0) {
                 Cost worker = cost.get(0);
@@ -377,7 +377,7 @@ public class SantaElena extends World
         
         if ( res ) {
             removeObject( merchantSign );
-            addObject( merchant, 660, 470 );
+            addObject( merchant, 660, 465 );
             List<Cost> cost = this.getObjects(Cost.class);
             if (cost.size() > 0) {
                 Cost worker = cost.get(0);
