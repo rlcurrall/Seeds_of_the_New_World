@@ -16,7 +16,18 @@ public class Player extends Actor
     
     // Sound for NPC
     GreenfootSound hmm = new GreenfootSound( "hmm.wav" );
+    GreenfootSound fire = new GreenfootSound("fire.mp3");
+    GreenfootSound water = new GreenfootSound("water.mp3");
+    GreenfootSound chest = new GreenfootSound("metal_latch.mp3");
     private boolean hmmPlayed = false;
+    private boolean firePlayed = false;
+    private boolean waterPlayed = false;
+    private boolean chestPlayed = false;
+    
+    // Colors
+    Color yellow = new Color(255, 255, 0);
+    Color aqua = new Color(0, 255, 255);
+    Color fushia = new Color( 255, 0, 255);
     
     // Player Images
     // Up/Down
@@ -247,12 +258,42 @@ public class Player extends Actor
             if ( "enter".equals( Greenfoot.getKey() ) ) {
                 ((SantaElena) getWorld()).priestDialog();
             }
+        } else if ( currentColor.equals( yellow ) ) {
+            // play sound once
+            if ( !firePlayed ) {
+                fire.setVolume(50);
+                fire.play();
+                firePlayed = true;
+            } // end if
+        } else if ( currentColor.equals( aqua ) ) {
+            // play sound once
+            if ( !waterPlayed ) {
+                water.setVolume(50);
+                water.play();
+                waterPlayed = true;
+            } // end if
+        } else if ( currentColor.equals( fushia ) ) {
+            // play sound once
+            if ( !chestPlayed ) {
+                chest.setVolume(50);
+                chest.play();
+                chestPlayed = true;
+            } // end if
         } else {
             if (!dialogRemoved){
                 ((SantaElena) getWorld()).removeWorkerDialog();
                 dialogRemoved = true;
             } // end if
+            if ( firePlayed ) {
+                fire.stop();
+            } // end if
+            if ( waterPlayed ) {
+                water.stop();
+            } // end if
             hmmPlayed = false;
+            firePlayed = false;
+            waterPlayed = false;
+            chestPlayed = false;
         } // end else-if block
     } // end dialog method
     
