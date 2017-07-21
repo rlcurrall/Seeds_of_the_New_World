@@ -94,7 +94,7 @@ public class SantaElena extends World
      */
     public void act() {
          // play background music when game begins
-         background.setVolume(4);
+         background.setVolume(10);
          background.playLoop();
          
          // check if game over

@@ -163,7 +163,7 @@ public class Player extends Actor
             
             // play sound once
             if ( !hmmPlayed ) {
-                hmm.setVolume(125);
+                hmm.setVolume(100);
                 hmm.play();
                 hmmPlayed = true;
             } // end if
@@ -189,7 +189,7 @@ public class Player extends Actor
             
             // play sound once
             if ( !hmmPlayed ) {
-                hmm.setVolume(125);
+                hmm.setVolume(100);
                 hmm.play();
                 hmmPlayed = true;
             } // end if
@@ -215,7 +215,7 @@ public class Player extends Actor
             
             // play sound once
             if ( !hmmPlayed ) {
-                hmm.setVolume(125);
+                hmm.setVolume(100);
                 hmm.play();
                 hmmPlayed = true;
             } // end if
@@ -239,7 +239,7 @@ public class Player extends Actor
             
             // play sound once
             if ( !hmmPlayed ) {
-                hmm.setVolume(125);
+                hmm.setVolume(100);
                 hmm.play();
                 hmmPlayed = true;
             } // end if
