@@ -38,7 +38,7 @@ public class Tax extends Actor
      * display - update the image of the object to show the tax collected each month
      */
     private void display() {
-        setImage( new GreenfootImage("Montly Taxes:     " + tax + " Reales", 14, Color.black, background));
+        setImage( new GreenfootImage("Monthly Taxes:     " + tax + " Reales", 14, Color.black, background));
     } // end display method
     
     /**
