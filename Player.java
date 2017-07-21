@@ -163,7 +163,7 @@ public class Player extends Actor
             
             // play sound once
             if ( !hmmPlayed ) {
-                hmm.setVolume(20);
+                hmm.setVolume(125);
                 hmm.play();
                 hmmPlayed = true;
             } // end if
@@ -189,7 +189,7 @@ public class Player extends Actor
             
             // play sound once
             if ( !hmmPlayed ) {
-                hmm.setVolume(20);
+                hmm.setVolume(125);
                 hmm.play();
                 hmmPlayed = true;
             } // end if
@@ -215,7 +215,7 @@ public class Player extends Actor
             
             // play sound once
             if ( !hmmPlayed ) {
-                hmm.setVolume(20);
+                hmm.setVolume(125);
                 hmm.play();
                 hmmPlayed = true;
             } // end if
@@ -236,6 +236,14 @@ public class Player extends Actor
         } else if ( currentColor.equals( Color.white ) ) {
             dialogRemoved = false;
             ((SantaElena) getWorld()).displayDialog("Priest");
+            
+            // play sound once
+            if ( !hmmPlayed ) {
+                hmm.setVolume(125);
+                hmm.play();
+                hmmPlayed = true;
+            } // end if
+            
             if ( "enter".equals( Greenfoot.getKey() ) ) {
                 ((SantaElena) getWorld()).priestDialog();
             }
@@ -245,7 +253,7 @@ public class Player extends Actor
                 dialogRemoved = true;
             } // end if
             hmmPlayed = false;
-        }
+        } // end else-if block
     } // end dialog method
     
     /**
