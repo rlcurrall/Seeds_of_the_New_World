@@ -260,25 +260,31 @@ public class Player extends Actor
             }
         } else if ( currentColor.equals( yellow ) ) {
             // play sound once
+            /*
             if ( !firePlayed ) {
                 fire.setVolume(50);
-                fire.play();
+                fire.playLoop();
                 firePlayed = true;
             } // end if
+            */
         } else if ( currentColor.equals( aqua ) ) {
             // play sound once
+            /*
             if ( !waterPlayed ) {
                 water.setVolume(50);
-                water.play();
+                water.playLoop();
                 waterPlayed = true;
             } // end if
+            */
         } else if ( currentColor.equals( fushia ) ) {
             // play sound once
+            /*
             if ( !chestPlayed ) {
                 chest.setVolume(50);
                 chest.play();
                 chestPlayed = true;
             } // end if
+            */
         } else {
             if (!dialogRemoved){
                 ((SantaElena) getWorld()).removeWorkerDialog();
