@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.params=
-comment0.target=Characters()
-comment0.text=\r\n\ Constructor\ -\ Sets\ the\ dimensions\ of\ the\ world.\r\n\ \r\n
-comment1.params=
-comment1.target=void\ act()
-comment1.text=\r\n\ Act\ -\ Check\ if\ player\ pressed\ the\ ENTER\ key,\ if\ so\ move\ to\ the\ next\ world.\r\n
-numComments=2

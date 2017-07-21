@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.*;
 
 /**
  * Start: creates the start screen for the game and plays the intro music "friends.mp3", changes the screen
@@ -12,6 +13,14 @@ public class Start extends World
     /* FIELDS */
     // add music variable
     GreenfootSound music = new GreenfootSound( "friends.mp3" );
+    private int count;
+    
+    // images for background
+    List<GreenfootImage> images = Arrays.asList(
+        new GreenfootImage("tutorial_backstory.png"),
+        new GreenfootImage("tutorial_characters.png"),
+        new GreenfootImage("tutorial_keys.png")
+    );
     
     /* CONSTRUCTORS */
     /**
@@ -21,6 +30,7 @@ public class Start extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(720, 680, 1); 
+        count = 0;
     } // end Start constructor
     
     /* METHODS*/
@@ -33,19 +43,19 @@ public class Start extends World
         music.playLoop();
         
         // start the game & end the music when user presses enter
-        if ( "enter".equals( Greenfoot.getKey() )) {
-            // stop the music
-            music.stop();
-            // change the world to begin the game
-            startGame();
-        }
+        if ( "enter".equals( Greenfoot.getKey() ) ) {
+            if (count < 3) {
+                // change the background and increment count
+                setBackground(images.get(count));
+                count++;
+            } else {
+                // stop music playing
+                music.stop();
+                
+                // change the world
+                SantaElena elena = new SantaElena();
+                Greenfoot.setWorld(elena);
+            } // end else-if block
+        } // end if block
     } // end Act method
-    
-    /**
-     * startGame: Will change world to the SantaElena world when called
-     */
-    public void startGame() {
-        Backstory back = new Backstory();
-        Greenfoot.setWorld(back);
-    } // end startGame method
 } // end Start class
