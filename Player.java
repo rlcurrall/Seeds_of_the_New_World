@@ -16,9 +16,9 @@ public class Player extends Actor
     
     // Sound for NPC
     GreenfootSound hmm = new GreenfootSound( "hmm.wav" );
-    GreenfootSound fire = new GreenfootSound("fire.mp3");
-    GreenfootSound water = new GreenfootSound("water.mp3");
-    GreenfootSound chest = new GreenfootSound("metal_latch.mp3");
+    GreenfootSound fire = new GreenfootSound("fire.wav");
+    GreenfootSound water = new GreenfootSound("water.wav");
+    GreenfootSound chest = new GreenfootSound("metal_latch.wav");
     private boolean hmmPlayed = false;
     private boolean firePlayed = false;
     private boolean waterPlayed = false;
@@ -260,31 +260,25 @@ public class Player extends Actor
             }
         } else if ( currentColor.equals( yellow ) ) {
             // play sound once
-            /*
             if ( !firePlayed ) {
                 fire.setVolume(50);
                 fire.playLoop();
                 firePlayed = true;
             } // end if
-            */
         } else if ( currentColor.equals( aqua ) ) {
             // play sound once
-            /*
             if ( !waterPlayed ) {
                 water.setVolume(50);
                 water.playLoop();
                 waterPlayed = true;
             } // end if
-            */
         } else if ( currentColor.equals( fushia ) ) {
             // play sound once
-            /*
             if ( !chestPlayed ) {
                 chest.setVolume(50);
                 chest.play();
                 chestPlayed = true;
             } // end if
-            */
         } else {
             if (!dialogRemoved){
                 ((SantaElena) getWorld()).removeWorkerDialog();
@@ -308,6 +302,13 @@ public class Player extends Actor
      */
     public void checkQuit() {
         if( Greenfoot.isKeyDown("q") || Greenfoot.isKeyDown("Q") ) {
+            if ( fire.isPlaying() ) {
+                fire.stop();
+            } // end if
+            if ( water.isPlaying() ) {
+                water.stop();
+            }// end if
+            
             Start start = new Start();
             ((SantaElena) getWorld()).background.stop();
             Greenfoot.setWorld(start);
